@@ -1,132 +1,307 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grade 4 Dashboard - MindFlow</title>
-    <link rel="stylesheet" href="styles/grade-dashboard.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>MindFlow-AI - Grade 4 Learning Hub</title>
+    <link rel='stylesheet' href='styles/style.css'>
+    <link rel='stylesheet' href='styles/tracker-integration.css'>
+    <style>
+    .learning-hub {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .search-container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+    }
+    
+    .search-box {
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+        border: 2px solid #667eea;
+        border-radius: 25px;
+        margin-bottom: 20px;
+    }
+    
+    .search-results {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    
+    .subject-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+    }
+    
+    .subject-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: transform 0.3s ease;
+        border-left: 5px solid #667eea;
+    }
+    
+    .subject-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .topic-item {
+        background: #f8f9fa;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 10px;
+        cursor: pointer;
+        border-left: 4px solid #28a745;
+    }
+    
+    .topic-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px 0;
+        display: none;
+    }
+    
+    .interactive-game {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 20px 0;
+    }
+    </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- Header -->
-        <header class="dashboard-header">
-            <button class="back-btn" onclick="goHome()">
-                <i class="fas fa-arrow-left"></i>
-                Back to Home
-            </button>
-            <div class="grade-info">
-                <h1>🎓 Grade 4 Dashboard</h1>
-                <p>Welcome to your personalized learning journey!</p>
-            </div>
-            <div class="user-progress">
-                <div class="progress-circle">
-                    <span class="progress-value">0%</span>
-                </div>
-                <span>Overall Progress</span>
+    <div class='dashboard-container'>
+        <header class='dashboard-header'>
+            <h1>🎓 Grade 4 Learning Hub</h1>
+            <div class='user-info'>
+                <span>Powered by MindFlow AI</span>
             </div>
         </header>
 
-        <!-- Subject Grid -->
-        <section class="subjects-section">
-            <h2>📚 Your Subjects</h2>
-            <div class="subjects-grid">
-                <!-- Mathematics -->
-                <div class="subject-card mathematics" onclick="openSubject('mathematics', 4)">
-                    <div class="subject-header">
-                        <i class="fas fa-calculator"></i>
-                        <h3>Mathematics</h3>
-                    </div>
-                    <p>Numbers, Operations, Geometry, Data</p>
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 0%"></div>
-                        </div>
-                        <span class="progress-text">0% Complete</span>
-                    </div>
-                    <div class="subject-actions">
-                        <button class="action-btn study-btn" onclick="event.stopPropagation(); openStudyMaterial('mathematics', 4)">
-                            <i class="fas fa-book"></i> Study
-                        </button>
-                        <button class="action-btn practice-btn" onclick="event.stopPropagation(); openPractice('mathematics', 4)">
-                            <i class="fas fa-pencil-alt"></i> Practice
-                        </button>
-                        <button class="action-btn games-btn" onclick="event.stopPropagation(); openGames('mathematics', 4)">
-                            <i class="fas fa-gamepad"></i> Games
-                        </button>
-                    </div>
+        <nav class='dashboard-nav'>
+            <a href='index.html' class='nav-link'>🏠 Home</a>
+            <a href='student.html' class='nav-link'>🎓 My Dashboard</a>
+            <a href='parent.html' class='nav-link'>👨‍👩‍👧‍👦 Parent View</a>
+            <a href='teacher.html' class='nav-link'>👨‍🏫 Teacher View</a>
+        </nav>
+
+        <main class='learning-hub'>
+            <!-- AI Search Section -->
+            <section class='search-container'>
+                <h2>🔍 AI Learning Assistant</h2>
+                <p>Ask me anything about Grade 4 subjects! I'll find the best learning materials for you.</p>
+                
+                <input type='text' class='search-box' id='searchInput' placeholder='Ask about multiplication, fractions, ecosystems, or any Grade 4 topic...'>
+                
+                <div class='search-results' id='searchResults'>
+                    <!-- Search results will appear here -->
+                </div>
+            </section>
+
+            <!-- Mathematics Section -->
+            <section class='subject-card'>
+                <h2>🧮 Mathematics</h2>
+                <p>Master numbers, operations, and problem-solving skills</p>
+                
+                <div class='topic-item' onclick='showTopic(\"math-place-value\")'>
+                    <h4>Place Value to Millions</h4>
+                    <p>Understanding 7-digit numbers and expanded form</p>
+                </div>
+                
+                <div class='topic-item' onclick='showTopic(\"math-multiplication\")'>
+                    <h4>Multiplication Mastery</h4>
+                    <p>Times tables and multi-digit multiplication</p>
+                </div>
+                
+                <div class='topic-item' onclick='showTopic(\"math-fractions\")'>
+                    <h4>Fraction Fundamentals</h4>
+                    <p>Understanding numerators, denominators, and equivalents</p>
                 </div>
 
-                <!-- Natural Sciences -->
-                <div class="subject-card sciences" onclick="openSubject('sciences', 4)">
-                    <div class="subject-header">
-                        <i class="fas fa-flask"></i>
-                        <h3>Natural Sciences</h3>
-                    </div>
-                    <p>Physics, Chemistry, Biology, Earth</p>
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 0%"></div>
-                        </div>
-                        <span class="progress-text">0% Complete</span>
-                    </div>
-                    <div class="subject-actions">
-                        <button class="action-btn study-btn" onclick="event.stopPropagation(); openStudyMaterial('sciences', 4)">
-                            <i class="fas fa-book"></i> Study
-                        </button>
-                        <button class="action-btn practice-btn" onclick="event.stopPropagation(); openPractice('sciences', 4)">
-                            <i class="fas fa-pencil-alt"></i> Practice
-                        </button>
-                        <button class="action-btn games-btn" onclick="event.stopPropagation(); openGames('sciences', 4)">
-                            <i class="fas fa-gamepad"></i> Games
-                        </button>
-                    </div>
+                <div class='interactive-game'>
+                    <h3>🎮 Multiplication Marathon</h3>
+                    <p>Race against time to solve multiplication problems!</p>
+                    <button onclick='startMultiplicationGame()' class='btn-primary'>Start Game</button>
                 </div>
+            </section>
 
-                <!-- Coming Soon Subjects -->
-                <div class="subject-card coming-soon">
-                    <div class="subject-header">
-                        <i class="fas fa-clock"></i>
-                        <h3>English</h3>
-                    </div>
-                    <p>Language, Literature, Communication</p>
-                    <div class="coming-soon-badge">Coming Soon</div>
+            <!-- Science Section -->
+            <section class='subject-card'>
+                <h2>🔬 Science</h2>
+                <p>Explore ecosystems, matter, and scientific inquiry</p>
+                
+                <div class='topic-item' onclick='showTopic(\"science-ecosystems\")'>
+                    <h4>Ecosystems & Food Chains</h4>
+                    <p>How living things depend on each other</p>
                 </div>
+                
+                <div class='topic-item'>
+                    <h4>States of Matter</h4>
+                    <p>Solids, liquids, gases and their properties</p>
+                </div>
+                
+                <div class='topic-item'>
+                    <h4>Weather & Climate</h4>
+                    <p>Understanding weather patterns and seasons</p>
+                </div>
+            </section>
 
-                <div class="subject-card coming-soon">
-                    <div class="subject-header">
-                        <i class="fas fa-globe-africa"></i>
-                        <h3>Social Sciences</h3>
-                    </div>
-                    <p>History, Geography, Heritage</p>
-                    <div class="coming-soon-badge">Coming Soon</div>
+            <!-- English Section -->
+            <section class='subject-card'>
+                <h2>📚 English Language Arts</h2>
+                <p>Reading comprehension, writing, and grammar skills</p>
+                
+                <div class='topic-item'>
+                    <h4>Reading Comprehension</h4>
+                    <p>Understanding stories and extracting information</p>
                 </div>
+                
+                <div class='topic-item'>
+                    <h4>Creative Writing</h4>
+                    <p>Writing stories, poems, and descriptions</p>
+                </div>
+                
+                <div class='topic-item'>
+                    <h4>Grammar & Punctuation</h4>
+                    <p>Proper sentence structure and punctuation</p>
+                </div>
+            </section>
+
+            <!-- Topic Content Display -->
+            <div id='topicContent' class='topic-content'>
+                <!-- Topic content will be displayed here -->
             </div>
-        </section>
 
-        <!-- Quick Access Games -->
-        <section class="games-section">
-            <h2>🎮 Learning Games</h2>
-            <div class="games-grid">
-                <div class="game-card" onclick="openGame('memory-match')">
-                    <i class="fas fa-brain"></i>
-                    <h3>Memory Match</h3>
-                    <p>Boost memory with curriculum content</p>
+            <!-- Progress Tracking -->
+            <section class='subject-card'>
+                <h2>📊 My Learning Progress</h2>
+                <div class='progress-grid'>
+                    <div class='progress-item'>
+                        <h4>Mathematics</h4>
+                        <div class='progress-bar'>
+                            <div class='progress-fill' style='width: 65%'></div>
+                        </div>
+                        <span>65% Complete</span>
+                    </div>
+                    <div class='progress-item'>
+                        <h4>Science</h4>
+                        <div class='progress-bar'>
+                            <div class='progress-fill' style='width: 40%'></div>
+                        </div>
+                        <span>40% Complete</span>
+                    </div>
+                    <div class='progress-item'>
+                        <h4>English</h4>
+                        <div class='progress-bar'>
+                            <div class='progress-fill' style='width: 55%'></div>
+                        </div>
+                        <span>55% Complete</span>
+                    </div>
                 </div>
-                <div class="game-card" onclick="openGame('math-pop')">
-                    <i class="fas fa-calculator"></i>
-                    <h3>Math Pop</h3>
-                    <p>Practice arithmetic with fun bubble game</p>
-                </div>
-                <div class="game-card coming-soon">
-                    <i class="fas fa-question-circle"></i>
-                    <h3>Quiz Dash</h3>
-                    <p>Test your knowledge (Coming Soon)</p>
-                </div>
-            </div>
-        </section>
+            </section>
+        </main>
     </div>
 
-    <script src="scripts/grade-dashboard.js"></script>
+    <script src='curriculum/ai-search/search-engine.js'></script>
+    <script>
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        const query = e.target.value;
+        if (query.length > 2) {
+            performSearch(query);
+        } else {
+            document.getElementById('searchResults').innerHTML = '';
+        }
+    });
+
+    function performSearch(query) {
+        const results = window.curriculumSearch.search(query);
+        displaySearchResults(results);
+    }
+
+    function displaySearchResults(results) {
+        const container = document.getElementById('searchResults');
+        
+        if (results.length === 0) {
+            container.innerHTML = '<p>No results found. Try different keywords.</p>';
+            return;
+        }
+
+        let html = '<h4>Search Results:</h4>';
+        results.forEach(topic => {
+            html += \
+                <div class='topic-item' onclick='showTopic(\"\\")'>
+                    <h5>\</h5>
+                    <p>\...</p>
+                    <small>Keywords: \</small>
+                </div>
+            \;
+        });
+
+        container.innerHTML = html;
+    }
+
+    function showTopic(topicId) {
+        const topic = window.curriculumSearch.getTopicById(topicId);
+        const container = document.getElementById('topicContent');
+        
+        if (!topic) {
+            container.innerHTML = '<p>Topic not found.</p>';
+            return;
+        }
+
+        let html = \
+            <h3>\</h3>
+            <p>\</p>
+            <h4>Examples:</h4>
+            <ul>
+        \;
+        
+        topic.examples.forEach(example => {
+            html += \<li>\</li>\;
+        });
+        
+        html += '</ul>';
+        
+        // Show related topics
+        const related = window.curriculumSearch.getRelatedTopics(topicId);
+        if (related.length > 0) {
+            html += '<h4>Related Topics:</h4>';
+            related.forEach(relatedTopic => {
+                html += \<button onclick='showTopic(\"\\")' class='btn-small'>\</button> \;
+            });
+        }
+
+        container.style.display = 'block';
+        container.innerHTML = html;
+    }
+
+    function startMultiplicationGame() {
+        alert('🚀 Starting Multiplication Marathon!\\n\\nSolve as many problems as you can in 60 seconds!\\nReady... Set... GO!');
+        // Game implementation would go here
+    }
+
+    // Initialize search when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            if (window.curriculumSearch) {
+                console.log('AI Search Engine Ready');
+            }
+        }, 1000);
+    });
+    </script>
 </body>
 </html>
