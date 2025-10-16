@@ -1,0 +1,232 @@
+﻿/* MindFlow-AI Core CSS Framework - Powered by Khensani AI */
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --khensani-purple: #8B5FBF;
+    --khensani-teal: #20c997;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Khensani Brand Header */
+.khensani-header {
+    background: rgba(255,255,255,0.95);
+    padding: 1rem 2rem;
+    text-align: center;
+    border-bottom: 3px solid var(--khensani-purple);
+}
+
+.brand-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, var(--khensani-purple), var(--khensani-teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.brand-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Khensani AI Assistant Chat */
+.khensani-chat {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 50px;
+    padding: 15px 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 1000;
+    border: 3px solid var(--khensani-purple);
+}
+
+.khensani-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--khensani-purple), var(--khensani-teal));
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.khensani-message {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
+    color: var(--khensani-purple);
+}
+
+/* Dashboard Layout */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.95);
+    min-height: 100vh;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+}
+
+.dashboard-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+.dashboard-nav {
+    background: #f8f9fa;
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.nav-link {
+    padding: 10px 20px;
+    background: white;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.nav-link:hover {
+    transform: translateY(-2px);
+    border-color: var(--khensani-purple);
+    box-shadow: 0 5px 15px rgba(139, 95, 191, 0.3);
+}
+
+/* Cards & Widgets */
+.dashboard-main {
+    padding: 2rem;
+}
+
+.widget {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-left: 4px solid var(--khensani-purple);
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Khensani Subject Helper */
+.khensani-helper {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-left: 4px solid var(--khensani-teal);
+}
+
+.helper-text {
+    font-style: italic;
+    color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .nav-link {
+        text-align: center;
+    }
+    
+    .khensani-chat {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        text-align: center;
+    }
+    
+    .brand-title {
+        font-size: 2rem;
+    }
+}
+
+/* Loading States */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.loading::after {
+    content: '...';
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60% { content: '...'; }
+    80%, 100% { content: ''; }
+}
+
+/* Khensani Achievement System */
+.achievement {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    text-align: center;
+}
+
+/* Emergency System */
+.emergency-alert {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
