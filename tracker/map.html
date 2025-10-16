@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPath with Khensani - Live Student Tracking</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="tracker.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+</head>
+<body>
+    <div class="header">
+        <h1>🛡️ SmartPath with Khensani</h1>
+        <p>Live Student Safety Tracking</p>
+    </div>
+    
+    <div id="map"></div>
+    
+    <div class="controls">
+        <button id="startBtn" onclick="startRealTracking()">📍 Start SmartPath Tracking</button>
+        <button id="simulateBtn" onclick="startSimulation()">🎮 Demo Simulation</button>
+        <div class="status" id="status">Status: Ready to track</div>
+    </div>
+    
+    <div class="info-panel">
+        <h3>👥 Tracked Students</h3>
+        <div id="studentsList">
+            <div class="student" id="student1">
+                <span class="name">Khensani M.</span>
+                <span class="location" id="loc1">-25.7489, 28.2295</span>
+                <span class="time" id="time1">Just now</span>
+            </div>
+            <div class="student" id="student2">
+                <span class="name">Thabo B.</span>
+                <span class="location" id="loc2">-25.7485, 28.2302</span>
+                <span class="time" id="time2">Just now</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CDN Libraries -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+    <script src="tracker.js"></script>
+</body>
+</html>

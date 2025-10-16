@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Dashboard - MindFlow</title>
+    <link rel="stylesheet" href="styles/grade-dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <button class="back-btn" onclick="goHome()">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </button>
+            <div class="grade-info">
+                <h1>🎓 Grade 4 Dashboard</h1>
+                <p>Welcome to your personalized learning journey!</p>
+            </div>
+            <div class="user-progress">
+                <div class="progress-circle">
+                    <span class="progress-value">0%</span>
+                </div>
+                <span>Overall Progress</span>
+            </div>
+        </header>
+
+        <!-- Subject Grid -->
+        <section class="subjects-section">
+            <h2>📚 Your Subjects</h2>
+            <div class="subjects-grid">
+                <!-- Mathematics -->
+                <div class="subject-card mathematics" onclick="openSubject('mathematics', 4)">
+                    <div class="subject-header">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Mathematics</h3>
+                    </div>
+                    <p>Numbers, Operations, Geometry, Data</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text">0% Complete</span>
+                    </div>
+                    <div class="subject-actions">
+                        <button class="action-btn study-btn" onclick="event.stopPropagation(); openStudyMaterial('mathematics', 4)">
+                            <i class="fas fa-book"></i> Study
+                        </button>
+                        <button class="action-btn practice-btn" onclick="event.stopPropagation(); openPractice('mathematics', 4)">
+                            <i class="fas fa-pencil-alt"></i> Practice
+                        </button>
+                        <button class="action-btn games-btn" onclick="event.stopPropagation(); openGames('mathematics', 4)">
+                            <i class="fas fa-gamepad"></i> Games
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Natural Sciences -->
+                <div class="subject-card sciences" onclick="openSubject('sciences', 4)">
+                    <div class="subject-header">
+                        <i class="fas fa-flask"></i>
+                        <h3>Natural Sciences</h3>
+                    </div>
+                    <p>Physics, Chemistry, Biology, Earth</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text">0% Complete</span>
+                    </div>
+                    <div class="subject-actions">
+                        <button class="action-btn study-btn" onclick="event.stopPropagation(); openStudyMaterial('sciences', 4)">
+                            <i class="fas fa-book"></i> Study
+                        </button>
+                        <button class="action-btn practice-btn" onclick="event.stopPropagation(); openPractice('sciences', 4)">
+                            <i class="fas fa-pencil-alt"></i> Practice
+                        </button>
+                        <button class="action-btn games-btn" onclick="event.stopPropagation(); openGames('sciences', 4)">
+                            <i class="fas fa-gamepad"></i> Games
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Subjects -->
+                <div class="subject-card coming-soon">
+                    <div class="subject-header">
+                        <i class="fas fa-clock"></i>
+                        <h3>English</h3>
+                    </div>
+                    <p>Language, Literature, Communication</p>
+                    <div class="coming-soon-badge">Coming Soon</div>
+                </div>
+
+                <div class="subject-card coming-soon">
+                    <div class="subject-header">
+                        <i class="fas fa-globe-africa"></i>
+                        <h3>Social Sciences</h3>
+                    </div>
+                    <p>History, Geography, Heritage</p>
+                    <div class="coming-soon-badge">Coming Soon</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Access Games -->
+        <section class="games-section">
+            <h2>🎮 Learning Games</h2>
+            <div class="games-grid">
+                <div class="game-card" onclick="openGame('memory-match')">
+                    <i class="fas fa-brain"></i>
+                    <h3>Memory Match</h3>
+                    <p>Boost memory with curriculum content</p>
+                </div>
+                <div class="game-card" onclick="openGame('math-pop')">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Math Pop</h3>
+                    <p>Practice arithmetic with fun bubble game</p>
+                </div>
+                <div class="game-card coming-soon">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Quiz Dash</h3>
+                    <p>Test your knowledge (Coming Soon)</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="scripts/grade-dashboard.js"></script>
+</body>
+</html>

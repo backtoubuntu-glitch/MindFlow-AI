@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindFlow-AI - Student Dashboard</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/tracker-integration.css">
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container student-theme">
+        <header class="dashboard-header">
+            <h1>🎓 Student Dashboard</h1>
+            <div class="user-info">
+                <span id="connection-status" class="status-connected">Connected</span>
+                <span class="user-name">Khensani M. - Grade 4</span>
+            </div>
+        </header>
+
+        <nav class="dashboard-nav">
+            <a href="index.html" class="nav-link">🏠 Home</a>
+            <a href="tracker/map.html" class="nav-link">🗺️ My Tracker</a>
+            <a href="parent.html" class="nav-link">👨‍👩‍👧‍👦 Parent View</a>
+            <a href="teacher.html" class="nav-link">👨‍🏫 Teacher View</a>
+        </nav>
+
+        <main class="dashboard-main">
+            <!-- Alert Container -->
+            <div id="alert-container" class="alert-container"></div>
+
+            <!-- Safety Features -->
+            <section class="safety-widget">
+                <div class="widget-header">
+                    <h2>🛡️ My Safety</h2>
+                    <span id="student-status" class="status-indicator">Loading...</span>
+                </div>
+                
+                <div class="safety-status">
+                    <div class="status-item">
+                        <span class="status-icon">📍</span>
+                        <div class="status-info">
+                            <strong>Location Tracking</strong>
+                            <span id="location-status">Active</span>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-icon">🏫</span>
+                        <div class="status-info">
+                            <strong>School Zone</strong>
+                            <span id="school-zone-status">Inside safe area</span>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-icon">⏰</span>
+                        <div class="status-info">
+                            <strong>Last Check-in</strong>
+                            <span id="last-checkin">Just now</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="emergency-section">
+                    <h3>Emergency Help</h3>
+                    <p>Use this button only in real emergencies</p>
+                    <button id="emergency-btn" class="emergency-btn">
+                        🚨 EMERGENCY HELP
+                    </button>
+                    <div class="emergency-contacts">
+                        <strong>Quick Contacts:</strong>
+                        <button class="contact-btn" onclick="alert('Calling Mom...')">📞 Mom</button>
+                        <button class="contact-btn" onclick="alert('Calling School...')">🏫 School</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Classes -->
+            <section class="classes-widget">
+                <h2>📚 My Classes</h2>
+                <div class="class-grid">
+                    <div class="class-card" onclick="window.open('grade-4.html', '_blank')">
+                        <div class="class-icon">🔢</div>
+                        <h3>Mathematics</h3>
+                        <p>Grade 4 - Room 12</p>
+                        <span class="class-time">9:00 AM</span>
+                    </div>
+                    <div class="class-card">
+                        <div class="class-icon">🔬</div>
+                        <h3>Science</h3>
+                        <p>Grade 4 - Lab 3</p>
+                        <span class="class-time">10:30 AM</span>
+                    </div>
+                    <div class="class-card" onclick="window.open('chess.html', '_blank')">
+                        <div class="class-icon">♟️</div>
+                        <h3>Chess Club</h3>
+                        <p>Strategy Games</p>
+                        <span class="class-time">3:00 PM</span>
+                    </div>
+                    <div class="class-card">
+                        <div class="class-icon">🎨</div>
+                        <h3>Art Class</h3>
+                        <p>Creative Expression</p>
+                        <span class="class-time">1:00 PM</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learning Tools -->
+            <section class="learning-widget">
+                <h2>🎮 Learning Tools</h2>
+                <div class="tool-buttons">
+                    <button class="learning-btn" onclick="window.open('grade-4.html', '_blank')">
+                        🎯 Math Games
+                    </button>
+                    <button class="learning-btn" onclick="alert('Reading center opened')">
+                        📚 Reading Center
+                    </button>
+                    <button class="learning-btn" onclick="alert('Homework helper launched')">
+                        📝 Homework Help
+                    </button>
+                    <button class="learning-btn" onclick="window.open('chess.html', '_blank')">
+                        ♟️ Chess Challenge
+                    </button>
+                </div>
+            </section>
+
+            <!-- Achievements -->
+            <section class="achievements-widget">
+                <h2>🏆 My Achievements</h2>
+                <div class="achievements-grid">
+                    <div class="achievement earned">
+                        <span class="achievement-icon">⭐</span>
+                        <span class="achievement-text">Math Whiz</span>
+                    </div>
+                    <div class="achievement earned">
+                        <span class="achievement-icon">📚</span>
+                        <span class="achievement-text">Book Reader</span>
+                    </div>
+                    <div class="achievement">
+                        <span class="achievement-icon">♟️</span>
+                        <span class="achievement-text">Chess Master</span>
+                    </div>
+                    <div class="achievement">
+                        <span class="achievement-icon">🔬</span>
+                        <span class="achievement-text">Science Explorer</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="scripts/tracker-manager.js"></script>
+</body>
+</html>

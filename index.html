@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindFlow - Intelligent Learning Platform</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-title">MindFlow</div>
+            <div class="loading-subtitle">powered by MindTech</div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container" id="mainContent" style="display: none;">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span class="logo-text">MindFlow</span>
+            </div>
+            <nav class="main-nav">
+                <a href="#features">Features</a>
+                <a href="#grades">Get Started</a>
+                <a href="#about">About</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">AI-Powered Learning Revolution</h1>
+                <p class="hero-description">
+                    Experience personalized education with Khensani AI - your intelligent tutor 
+                    that adapts to South Africa's CAPS curriculum for Grades 4-9. 
+                    Join the future of learning today!
+                </p>
+                
+                <!-- Grade Selection -->
+                <section id="grades" class="grade-selection">
+                    <h2>🎓 Select Your Grade Level</h2>
+                    <p class="selection-subtitle">Choose your grade to access curriculum-aligned learning materials</p>
+                    
+                    <div class="grade-buttons">
+                        <button class="grade-btn" onclick="selectGrade(4)">
+                            <span class="grade-number">4</span>
+                            <span class="grade-label">Grade 4</span>
+                            <small>Ages 9-10</small>
+                        </button>
+                        <button class="grade-btn" onclick="selectGrade(5)">
+                            <span class="grade-number">5</span>
+                            <span class="grade-label">Grade 5</span>
+                            <small>Ages 10-11</small>
+                        </button>
+                        <button class="grade-btn" onclick="selectGrade(6)">
+                            <span class="grade-number">6</span>
+                            <span class="grade-label">Grade 6</span>
+                            <small>Ages 11-12</small>
+                        </button>
+                        <button class="grade-btn" onclick="selectGrade(7)">
+                            <span class="grade-number">7</span>
+                            <span class="grade-label">Grade 7</span>
+                            <small>Ages 12-13</small>
+                        </button>
+                        <button class="grade-btn" onclick="selectGrade(8)">
+                            <span class="grade-number">8</span>
+                            <span class="grade-label">Grade 8</span>
+                            <small>Ages 13-14</small>
+                        </button>
+                        <button class="grade-btn" onclick="selectGrade(9)">
+                            <span class="grade-number">9</span>
+                            <span class="grade-label">Grade 9</span>
+                            <small>Ages 14-15</small>
+                        </button>
+                    </div>
+                    
+                    <div class="portal-buttons">
+                        <button class="portal-btn student-btn" onclick="enterPortal('student')">
+                            <i class="fas fa-graduation-cap"></i>
+                            Student Portal
+                        </button>
+                        <button class="portal-btn teacher-btn" onclick="enterPortal('teacher')">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            Teacher Portal
+                        </button>
+                        <button class="portal-btn parent-btn" onclick="enterPortal('parent')">
+                            <i class="fas fa-user-friends"></i>
+                            Parent Portal
+                        </button>
+                    </div>
+                    
+                    <div class="quick-access">
+                        <button class="quick-btn" onclick="enterPortal('chess')">
+                            <i class="fas fa-chess"></i>
+                            Play & Learn Chess
+                        </button>
+                        <button class="quick-btn" onclick="enterPortal('memory-match')">
+                            <i class="fas fa-brain"></i>
+                            Memory Match Game
+                        </button>
+                        <button class="quick-btn" onclick="enterPortal('math-pop')">
+                            <i class="fas fa-calculator"></i>
+                            Math Pop Game
+                        </button>
+                        <button class="quick-btn" onclick="openKhensaniChat()">
+                            <i class="fas fa-robot"></i>
+                            Chat with Khensani AI
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <h2 class="section-title">Why Choose MindFlow?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-graduation-cap feature-icon"></i>
+                    <h3>CAPS Curriculum Aligned</h3>
+                    <p>Fully aligned with South Africa's national curriculum for Grades 4-9. Comprehensive coverage of Mathematics, Sciences, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-robot feature-icon"></i>
+                    <h3>AI-Powered Tutor</h3>
+                    <p>Khensani AI provides personalized learning paths, instant explanations, and adaptive difficulty based on your progress.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-gamepad feature-icon"></i>
+                    <h3>Interactive Learning Games</h3>
+                    <p>Educational games that make learning mathematics and sciences fun and engaging. Learn through play!</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor your learning journey with detailed analytics, progress reports, and achievement badges.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-music feature-icon"></i>
+                    <h3>Focus Music & Sounds</h3>
+                    <p>Wave-based audio environments to enhance concentration and learning retention during study sessions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users feature-icon"></i>
+                    <h3>Multi-Portal System</h3>
+                    <p>Seamless connection between students, teachers, and parents for collaborative learning experiences.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curriculum Section -->
+        <section class="curriculum-section">
+            <h2 class="section-title">📚 Comprehensive CAPS Curriculum</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-subject">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Mathematics</h3>
+                    <ul>
+                        <li>Number Operations & Mental Maths</li>
+                        <li>Patterns, Functions & Algebra</li>
+                        <li>Space, Shape & Geometry</li>
+                        <li>Measurement & Data Handling</li>
+                        <li>Financial Mathematics</li>
+                        <li>Probability & Statistics</li>
+                    </ul>
+                </div>
+                <div class="curriculum-subject">
+                    <i class="fas fa-flask"></i>
+                    <h3>Natural Sciences</h3>
+                    <ul>
+                        <li>Life & Living (Biology)</li>
+                        <li>Matter & Materials (Chemistry)</li>
+                        <li>Energy & Change (Physics)</li>
+                        <li>Planet Earth & Beyond</li>
+                        <li>Scientific Investigations</li>
+                        <li>Environmental Studies</li>
+                    </ul>
+                </div>
+                <div class="curriculum-subject">
+                    <i class="fas fa-globe-africa"></i>
+                    <h3>Social Sciences</h3>
+                    <ul>
+                        <li>South African History</li>
+                        <li>Geography & Map Skills</li>
+                        <li>African Heritage & Culture</li>
+                        <li>Government & Citizenship</li>
+                        <li>Economic Studies</li>
+                        <li>Environmental Geography</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Games Section -->
+        <section class="games-section">
+            <h2 class="section-title">🎮 Learning Games & Activities</h2>
+            <div class="games-grid">
+                <div class="game-card" onclick="enterPortal('memory-match')">
+                    <i class="fas fa-brain"></i>
+                    <h3>Memory Match</h3>
+                    <p>Boost your memory with curriculum-themed matching games. Match math symbols, science terms, and historical figures.</p>
+                    <div class="game-features">
+                        <span>🧠 Memory Training</span>
+                        <span>🎯 Curriculum Content</span>
+                        <span>⏱️ Timed Challenges</span>
+                    </div>
+                </div>
+                <div class="game-card" onclick="enterPortal('math-pop')">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Math Pop</h3>
+                    <p>Practice arithmetic with fun bubble-popping action. Solve math problems before time runs out!</p>
+                    <div class="game-features">
+                        <span>🔢 Arithmetic Practice</span>
+                        <span>⚡ Speed Training</span>
+                        <span>🏆 Score Tracking</span>
+                    </div>
+                </div>
+                <div class="game-card coming-soon">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Quiz Dash</h3>
+                    <p>Test your knowledge with timed multiple-choice questions across all subjects. Build streaks and earn rewards!</p>
+                    <div class="game-features">
+                        <span>📚 All Subjects</span>
+                        <span>🔥 Streak System</span>
+                        <span>🏅 Achievement Badges</span>
+                    </div>
+                    <div class="coming-soon-badge">Coming Soon</div>
+                </div>
+                <div class="game-card coming-soon">
+                    <i class="fas fa-puzzle-piece"></i>
+                    <h3>Puzzle Slider</h3>
+                    <p>Develop problem-solving skills with spatial reasoning puzzles and logic challenges.</p>
+                    <div class="game-features">
+                        <span>🧩 Logic Puzzles</span>
+                        <span>📐 Spatial Reasoning</span>
+                        <span>💡 Critical Thinking</span>
+                    </div>
+                    <div class="coming-soon-badge">Coming Soon</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <h2 class="section-title">🚀 How MindFlow Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Select Your Grade</h3>
+                    <p>Choose your grade level (4-9) to access age-appropriate curriculum content</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Explore Subjects</h3>
+                    <p>Access comprehensive learning materials for Mathematics, Sciences, and Social Sciences</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Play & Learn</h3>
+                    <p>Engage with interactive games that reinforce learning concepts</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Track Progress</h3>
+                    <p>Monitor your improvement with detailed analytics and achievement systems</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <h2 class="section-title">💬 What Learners Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "MindFlow made mathematics fun! The games helped me understand fractions better than my textbook."
+                    </div>
+                    <div class="testimonial-author">
+                        <strong>Lerato, Grade 6</strong>
+                        <span>Johannesburg</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As a teacher, I appreciate how MindFlow aligns with CAPS. My students are more engaged during lessons."
+                    </div>
+                    <div class="testimonial-author">
+                        <strong>Mr. Bhengu</strong>
+                        <span>Science Teacher</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Khensani AI helped my daughter with her science homework. She's now top of her class!"
+                    </div>
+                    <div class="testimonial-author">
+                        <strong>Mrs. Naidoo</strong>
+                        <span>Parent</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Ready to Start Your Learning Journey?</h2>
+                <p>Join thousands of South African learners using MindFlow to excel in their studies</p>
+                <button class="cta-button" onclick="scrollToGrades()">
+                    <i class="fas fa-rocket"></i>
+                    Get Started Now
+                </button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="about" class="main-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-brain"></i>
+                        <span>MindFlow</span>
+                    </div>
+                    <p class="powered-by">Aligned with CAPS Curriculum 🇿🇦</p>
+                    <p>Transforming South African education through cutting-edge AI technology and interactive learning.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="#features">Features</a>
+                        <a href="#grades">Get Started</a>
+                        <a href="#about">About Us</a>
+                        <a href="#">For Schools</a>
+                        <a href="#">For Teachers</a>
+                        <a href="#">For Parents</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Subjects</h4>
+                    <div class="footer-links">
+                        <a href="#">Mathematics</a>
+                        <a href="#">Natural Sciences</a>
+                        <a href="#">Social Sciences</a>
+                        <a href="#">English</a>
+                        <a href="#">Technology</a>
+                        <a href="#">Creative Arts</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="footer-links">
+                        <a href="#">Contact Support</a>
+                        <a href="#">Help Center</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Careers</a>
+                        <a href="#">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2024 MindFlow by MindTech. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Khensani Chat Modal -->
+    <div id="khensaniModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3><i class="fas fa-robot"></i> Khensani AI Assistant</h3>
+            <div class="chat-container">
+                <div class="ai-message">
+                    <strong>Khensani:</strong> Hello! I'm your AI learning assistant. I can help with mathematics, 
+                    sciences, social studies, and much more. What would you like to learn today?
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Ask me anything about your studies..." class="chat-input">
+                <button onclick="sendChatMessage()" class="chat-send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Initialize Supabase
+        const supabaseUrl = 'YOUR_SUPABASE_URL';
+        const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        
+        console.log('Supabase connected!');
+    </script>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
