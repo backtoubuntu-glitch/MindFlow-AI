@@ -13,7 +13,7 @@
         <header class='dashboard-header'>
             <h1>👨‍👩‍👧‍👦 Parent Dashboard</h1>
             <div class='user-info'>
-                <span id='connection-status' class='status-connected'>🔴 Connecting...</span>
+                <span id='connection-status' class='status-connecting'>🟡 Connecting to SmartPath...</span>
                 <span class='user-name'>Parent User</span>
             </div>
         </header>
@@ -26,13 +26,12 @@
         </nav>
 
         <main class='dashboard-main'>
-            <!-- Alert Container -->
             <div id='alert-container' class='alert-container'></div>
 
             <!-- SmartPath Tracker Widget -->
             <section class='tracker-widget'>
                 <div class='widget-header'>
-                    <h2>🛡️ SmartPath Child Tracking</h2>
+                    <h2>🛡️ SmartPath Live Tracking</h2>
                     <button onclick='window.trackerManager.openTracker()' class='btn-primary'>
                         Open Full Map
                     </button>
@@ -48,10 +47,13 @@
                             </div>
                         </div>
                         <div class='child-status'>
-                            <span id='child-status-1' class='status-indicator'>📍 Location updating...</span>
+                            <span id='child-status-1' class='status-indicator updating'>🔄 Updating location...</span>
                             <div class='child-actions'>
                                 <button onclick='window.trackerManager.openTracker(\"1\")' class='btn-small'>
                                     View Location
+                                </button>
+                                <button onclick='alert(\"Message sent to teacher\")' class='btn-small'>
+                                    📧 Teacher
                                 </button>
                             </div>
                         </div>
@@ -66,10 +68,13 @@
                             </div>
                         </div>
                         <div class='child-status'>
-                            <span id='child-status-2' class='status-indicator'>📍 Location updating...</span>
+                            <span id='child-status-2' class='status-indicator updating'>🔄 Updating location...</span>
                             <div class='child-actions'>
                                 <button onclick='window.trackerManager.openTracker(\"2\")' class='btn-small'>
                                     View Location
+                                </button>
+                                <button onclick='alert(\"Message sent to teacher\")' class='btn-small'>
+                                    📧 Teacher
                                 </button>
                             </div>
                         </div>
@@ -77,25 +82,25 @@
                 </div>
 
                 <div class='safety-overview'>
-                    <h4>Safety Status</h4>
+                    <h4>Safety Overview</h4>
                     <div class='safety-metrics'>
                         <div class='metric-card safe'>
-                            <span class='metric-value' id='children-safe'>2</span>
+                            <span class='metric-value'>2</span>
                             <span class='metric-label'>Children Safe</span>
                         </div>
                         <div class='metric-card present'>
-                            <span class='metric-value' id='children-present'>2</span>
+                            <span class='metric-value'>2</span>
                             <span class='metric-label'>At School</span>
                         </div>
                         <div class='metric-card alerts'>
-                            <span class='metric-value' id='alerts-today'>0</span>
+                            <span class='metric-value'>0</span>
                             <span class='metric-label'>Alerts Today</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Academic Overview -->
+            <!-- Academic Progress -->
             <section class='academic-widget'>
                 <h2>📚 Academic Progress</h2>
                 <div class='grades-overview'>
@@ -113,6 +118,13 @@
                             <div class='progress-fill' style='width: 78%'></div>
                         </div>
                     </div>
+                    <div class='grade-item'>
+                        <span class='subject'>English</span>
+                        <span class='grade'>A</span>
+                        <div class='progress-bar'>
+                            <div class='progress-fill' style='width: 92%'></div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -120,14 +132,17 @@
             <section class='actions-widget'>
                 <h2>⚡ Quick Actions</h2>
                 <div class='action-buttons'>
-                    <button class='action-btn' onclick='window.trackerManager.sendClassAlert(\"Message from parent\")'>
+                    <button class='action-btn' onclick='window.trackerManager.sendClassAlert(\"Parent message: Checking on student progress\")'>
                         📧 Message Teacher
                     </button>
-                    <button class='action-btn' onclick='alert(\"Attendance report sent to email\")'>
+                    <button class='action-btn' onclick='alert(\"Attendance report sent to your email\")'>
                         📊 View Attendance
                     </button>
                     <button class='action-btn' onclick='window.open(\"grade-4.html\", \"_blank\")'>
                         🎮 Learning Games
+                    </button>
+                    <button class='action-btn' onclick='window.open(\"chess.html\", \"_blank\")'>
+                        ♟️ Chess Progress
                     </button>
                 </div>
             </section>

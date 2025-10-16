@@ -1,120 +1,199 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>MindFlow-AI - Teacher Dashboard</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/tracker-integration.css">
-    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+    <link rel='stylesheet' href='styles/style.css'>
+    <link rel='stylesheet' href='styles/tracker-integration.css'>
+    <script src='https://cdn.socket.io/4.5.0/socket.io.min.js'></script>
 </head>
 <body>
-    <div class="dashboard-container">
-        <header class="dashboard-header">
+    <div class='dashboard-container'>
+        <header class='dashboard-header'>
             <h1>👨‍🏫 Teacher Dashboard</h1>
-            <div class="user-info">
-                <span id="connection-status" class="status-connected">Connected</span>
-                <span class="user-name">Mr. Johnson - Grade 4</span>
+            <div class='user-info'>
+                <span id='connection-status' class='status-connecting'>🟡 Connecting to SmartPath...</span>
+                <span class='user-name'>Mr. Johnson - Grade 4</span>
             </div>
         </header>
 
-        <nav class="dashboard-nav">
-            <a href="index.html" class="nav-link">🏠 Home</a>
-            <a href="tracker/map.html" class="nav-link">🗺️ Class Tracker</a>
-            <a href="parent.html" class="nav-link">👨‍👩‍👧‍👦 Parent Portal</a>
-            <a href="student.html" class="nav-link">🎓 Student View</a>
+        <nav class='dashboard-nav'>
+            <a href='index.html' class='nav-link'>🏠 Home</a>
+            <a href='tracker/map.html' class='nav-link'>🗺️ Class Tracker</a>
+            <a href='parent.html' class='nav-link'>👨‍👩‍👧‍👦 Parent Portal</a>
+            <a href='student.html' class='nav-link'>🎓 Student View</a>
         </nav>
 
-        <main class="dashboard-main">
-            <!-- Alert Container -->
-            <div id="alert-container" class="alert-container"></div>
+        <main class='dashboard-main'>
+            <div id='alert-container' class='alert-container'></div>
 
             <!-- Class Tracker Widget -->
-            <section class="class-tracker-widget">
-                <div class="widget-header">
+            <section class='class-tracker-widget'>
+                <div class='widget-header'>
                     <h2>👥 Class Monitor - Grade 4</h2>
-                    <button onclick="window.trackerManager.openTracker()" class="btn-primary">
+                    <button onclick='window.trackerManager.openTracker()' class='btn-primary'>
                         View Class Map
                     </button>
                 </div>
                 
-                <div class="attendance-overview">
-                    <div class="attendance-metric">
-                        <span class="metric-value" id="present-count">0</span>
-                        <span class="metric-label">Present</span>
+                <div class='attendance-overview'>
+                    <div class='attendance-metric present'>
+                        <span class='metric-value' id='present-count'>18</span>
+                        <span class='metric-label'>Present</span>
                     </div>
-                    <div class="attendance-metric">
-                        <span class="metric-value" id="absent-count">0</span>
-                        <span class="metric-label">Absent</span>
+                    <div class='attendance-metric absent'>
+                        <span class='metric-value' id='absent-count'>2</span>
+                        <span class='metric-label'>Absent</span>
                     </div>
-                    <div class="attendance-metric">
-                        <span class="metric-value" id="total-students">24</span>
-                        <span class="metric-label">Total</span>
+                    <div class='attendance-metric total'>
+                        <span class='metric-value' id='total-students'>20</span>
+                        <span class='metric-label'>Total</span>
                     </div>
                 </div>
 
-                <div class="quick-actions">
-                    <button class="action-btn emergency" onclick="window.trackerManager.sendClassAlert('EMERGENCY: Please follow emergency procedures', 'emergency')">
+                <div class='quick-actions'>
+                    <button class='action-btn emergency' onclick='window.trackerManager.sendClassAlert(\"EMERGENCY: Please follow emergency procedures\", \"emergency\")'>
                         🚨 Emergency Alert
                     </button>
-                    <button class="action-btn" onclick="window.trackerManager.sendClassAlert('Class starting in 5 minutes', 'info')">
+                    <button class='action-btn' onclick='window.trackerManager.sendClassAlert(\"Class starting in 5 minutes\", \"info\")'>
                         📢 Class Announcement
                     </button>
-                    <button class="action-btn" onclick="takeAttendance()">
+                    <button class='action-btn' onclick='takeAttendance()'>
                         ✅ Take Attendance
+                    </button>
+                    <button class='action-btn' onclick='window.trackerManager.sendClassAlert(\"Great work today class!\", \"success\")'>
+                        🎉 Praise Students
                     </button>
                 </div>
             </section>
 
             <!-- Student Roster -->
-            <section class="roster-widget">
-                <h2>📋 Student Roster</h2>
-                <div class="student-roster" id="student-roster">
-                    <!-- Dynamic content will be loaded by tracker-manager.js -->
-                    <div class="loading">Loading students...</div>
+            <section class='roster-widget'>
+                <h2>📋 Live Student Roster</h2>
+                <div class='student-roster' id='student-roster'>
+                    <div class='student-card present'>
+                        <span class='student-avatar'>👦</span>
+                        <div class='student-info'>
+                            <strong>Khensani M.</strong>
+                            <span>📍 In Classroom</span>
+                        </div>
+                        <span class='status-dot online'></span>
+                    </div>
+                    <div class='student-card present'>
+                        <span class='student-avatar'>👧</span>
+                        <div class='student-info'>
+                            <strong>Lerato B.</strong>
+                            <span>📍 In Library</span>
+                        </div>
+                        <span class='status-dot online'></span>
+                    </div>
+                    <div class='student-card absent'>
+                        <span class='student-avatar'>👦</span>
+                        <div class='student-info'>
+                            <strong>Thabo K.</strong>
+                            <span>❌ Absent Today</span>
+                        </div>
+                        <span class='status-dot offline'></span>
+                    </div>
+                    <div class='student-card present'>
+                        <span class='student-avatar'>👧</span>
+                        <div class='student-info'>
+                            <strong>Zanele N.</strong>
+                            <span>📍 In Science Lab</span>
+                        </div>
+                        <span class='status-dot online'></span>
+                    </div>
                 </div>
             </section>
 
             <!-- Teaching Tools -->
-            <section class="tools-widget">
+            <section class='tools-widget'>
                 <h2>🛠️ Teaching Tools</h2>
-                <div class="tool-grid">
-                    <div class="tool-card" onclick="window.open('grade-4.html', '_blank')">
-                        <div class="tool-icon">🎮</div>
+                <div class='tool-grid'>
+                    <div class='tool-card' onclick='window.open(\"grade-4.html\", \"_blank\")'>
+                        <div class='tool-icon'>🎮</div>
                         <h3>Learning Games</h3>
                         <p>Interactive educational games</p>
                     </div>
-                    <div class="tool-card" onclick="window.open('chess.html', '_blank')">
-                        <div class="tool-icon">♟️</div>
+                    <div class='tool-card' onclick='window.open(\"chess.html\", \"_blank\")'>
+                        <div class='tool-icon'>♟️</div>
                         <h3>Chess Club</h3>
                         <p>Strategic thinking games</p>
                     </div>
-                    <div class="tool-card" onclick="alert('Grade book opened')">
-                        <div class="tool-icon">📝</div>
+                    <div class='tool-card' onclick='alert(\"Grade book opened\")'>
+                        <div class='tool-icon'>📝</div>
                         <h3>Grade Book</h3>
                         <p>Record and manage grades</p>
                     </div>
-                    <div class="tool-card" onclick="window.trackerManager.sendClassAlert('Parent-teacher meeting scheduled', 'info')">
-                        <div class="tool-icon">📅</div>
+                    <div class='tool-card' onclick='window.trackerManager.sendClassAlert(\"Parent-teacher meeting scheduled for Friday\", \"info\")'>
+                        <div class='tool-icon'>📅</div>
                         <h3>Parent Contact</h3>
                         <p>Communicate with parents</p>
+                    </div>
+                    <div class='tool-card' onclick='alert(\"Lesson planner launched\")'>
+                        <div class='tool-icon'>📚</div>
+                        <h3>Lesson Plans</h3>
+                        <p>Create and manage lessons</p>
+                    </div>
+                    <div class='tool-card' onclick='window.trackerManager.sendClassAlert(\"Homework assigned: Math problems 1-10\", \"info\")'>
+                        <div class='tool-icon'>🏠</div>
+                        <h3>Assign Homework</h3>
+                        <p>Assign and track work</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Class Analytics -->
+            <section class='analytics-widget'>
+                <h2>📊 Class Analytics</h2>
+                <div class='analytics-grid'>
+                    <div class='analytics-card'>
+                        <span class='analytics-value'>94%</span>
+                        <span class='analytics-label'>Average Attendance</span>
+                    </div>
+                    <div class='analytics-card'>
+                        <span class='analytics-value'>87%</span>
+                        <span class='analytics-label'>Homework Completion</span>
+                    </div>
+                    <div class='analytics-card'>
+                        <span class='analytics-value'>A-</span>
+                        <span class='analytics-label'>Class Average</span>
+                    </div>
+                    <div class='analytics-card'>
+                        <span class='analytics-value'>12</span>
+                        <span class='analytics-label'>Active Students</span>
                     </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <script src="scripts/tracker-manager.js"></script>
+    <script src='scripts/tracker-manager.js'></script>
     <script>
-    // Teacher-specific functions
     function takeAttendance() {
         if (window.trackerManager && window.trackerManager.isConnected) {
             window.trackerManager.sendClassAlert('Attendance is being taken', 'info');
-            alert('Attendance recorded based on student locations');
+            alert('✅ Attendance recorded based on student locations!');
+            
+            // Simulate attendance update
+            document.getElementById('present-count').textContent = '19';
+            document.getElementById('absent-count').textContent = '1';
         } else {
             alert('Please connect to SmartPath for automated attendance');
         }
     }
+
+    // Simulate live updates
+    setInterval(() => {
+        const statusElements = document.querySelectorAll('.student-info span');
+        statusElements.forEach(el => {
+            if (el.textContent.includes('📍')) {
+                const locations = ['In Classroom', 'In Library', 'In Science Lab', 'In Cafeteria', 'In Playground'];
+                el.textContent = '📍 ' + locations[Math.floor(Math.random() * locations.length)];
+            }
+        });
+    }, 10000);
     </script>
 </body>
 </html>

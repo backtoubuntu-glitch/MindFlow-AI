@@ -1,154 +1,232 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>MindFlow-AI - Student Dashboard</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/tracker-integration.css">
-    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+    <link rel='stylesheet' href='styles/style.css'>
+    <link rel='stylesheet' href='styles/tracker-integration.css'>
+    <script src='https://cdn.socket.io/4.5.0/socket.io.min.js'></script>
 </head>
 <body>
-    <div class="dashboard-container student-theme">
-        <header class="dashboard-header">
+    <div class='dashboard-container student-theme'>
+        <header class='dashboard-header'>
             <h1>🎓 Student Dashboard</h1>
-            <div class="user-info">
-                <span id="connection-status" class="status-connected">Connected</span>
-                <span class="user-name">Khensani M. - Grade 4</span>
+            <div class='user-info'>
+                <span id='connection-status' class='status-connecting'>🟡 Connecting to SmartPath...</span>
+                <span class='user-name'>Khensani M. - Grade 4</span>
             </div>
         </header>
 
-        <nav class="dashboard-nav">
-            <a href="index.html" class="nav-link">🏠 Home</a>
-            <a href="tracker/map.html" class="nav-link">🗺️ My Tracker</a>
-            <a href="parent.html" class="nav-link">👨‍👩‍👧‍👦 Parent View</a>
-            <a href="teacher.html" class="nav-link">👨‍🏫 Teacher View</a>
+        <nav class='dashboard-nav'>
+            <a href='index.html' class='nav-link'>🏠 Home</a>
+            <a href='tracker/map.html' class='nav-link'>🗺️ My Tracker</a>
+            <a href='parent.html' class='nav-link'>👨‍👩‍👧‍👦 Parent View</a>
+            <a href='teacher.html' class='nav-link'>👨‍🏫 Teacher View</a>
         </nav>
 
-        <main class="dashboard-main">
-            <!-- Alert Container -->
-            <div id="alert-container" class="alert-container"></div>
+        <main class='dashboard-main'>
+            <div id='alert-container' class='alert-container'></div>
 
             <!-- Safety Features -->
-            <section class="safety-widget">
-                <div class="widget-header">
+            <section class='safety-widget'>
+                <div class='widget-header'>
                     <h2>🛡️ My Safety</h2>
-                    <span id="student-status" class="status-indicator">Loading...</span>
+                    <span id='student-status' class='status-indicator'>🟡 Connecting...</span>
                 </div>
                 
-                <div class="safety-status">
-                    <div class="status-item">
-                        <span class="status-icon">📍</span>
-                        <div class="status-info">
+                <div class='safety-status'>
+                    <div class='status-item'>
+                        <span class='status-icon'>📍</span>
+                        <div class='status-info'>
                             <strong>Location Tracking</strong>
-                            <span id="location-status">Active</span>
+                            <span id='location-status'>Active - Sharing with parents</span>
                         </div>
                     </div>
-                    <div class="status-item">
-                        <span class="status-icon">🏫</span>
-                        <div class="status-info">
+                    <div class='status-item'>
+                        <span class='status-icon'>🏫</span>
+                        <div class='status-info'>
                             <strong>School Zone</strong>
-                            <span id="school-zone-status">Inside safe area</span>
+                            <span id='school-zone-status'>✅ Inside safe area</span>
                         </div>
                     </div>
-                    <div class="status-item">
-                        <span class="status-icon">⏰</span>
-                        <div class="status-info">
+                    <div class='status-item'>
+                        <span class='status-icon'>⏰</span>
+                        <div class='status-info'>
                             <strong>Last Check-in</strong>
-                            <span id="last-checkin">Just now</span>
+                            <span id='last-checkin'>Just now</span>
+                        </div>
+                    </div>
+                    <div class='status-item'>
+                        <span class='status-icon'>👥</span>
+                        <div class='status-info'>
+                            <strong>Connected To</strong>
+                            <span id='connected-to'>Parents & School</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="emergency-section">
-                    <h3>Emergency Help</h3>
-                    <p>Use this button only in real emergencies</p>
-                    <button id="emergency-btn" class="emergency-btn">
-                        🚨 EMERGENCY HELP
+                <div class='emergency-section'>
+                    <h3>🚨 Emergency Help</h3>
+                    <p class='emergency-warning'>Use this button ONLY in real emergencies. Help will be sent immediately.</p>
+                    <button id='emergency-btn' class='emergency-btn'>
+                        🚨 PRESS FOR EMERGENCY HELP
                     </button>
-                    <div class="emergency-contacts">
+                    <div class='emergency-contacts'>
                         <strong>Quick Contacts:</strong>
-                        <button class="contact-btn" onclick="alert('Calling Mom...')">📞 Mom</button>
-                        <button class="contact-btn" onclick="alert('Calling School...')">🏫 School</button>
+                        <div class='contact-buttons'>
+                            <button class='contact-btn' onclick='alert(\"📞 Calling Mom...\")'>👩 Mom</button>
+                            <button class='contact-btn' onclick='alert(\"📞 Calling Dad...\")'>👨 Dad</button>
+                            <button class='contact-btn' onclick='alert(\"📞 Calling School Office...\")'>🏫 School</button>
+                            <button class='contact-btn' onclick='alert(\"📞 Calling Teacher...\")'>👨‍🏫 Teacher</button>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- My Classes -->
-            <section class="classes-widget">
+            <section class='classes-widget'>
                 <h2>📚 My Classes</h2>
-                <div class="class-grid">
-                    <div class="class-card" onclick="window.open('grade-4.html', '_blank')">
-                        <div class="class-icon">🔢</div>
+                <div class='class-grid'>
+                    <div class='class-card math' onclick='window.open(\"grade-4.html\", \"_blank\")'>
+                        <div class='class-icon'>🔢</div>
                         <h3>Mathematics</h3>
                         <p>Grade 4 - Room 12</p>
-                        <span class="class-time">9:00 AM</span>
+                        <span class='class-time'>9:00 AM</span>
+                        <span class='class-status current'>Current Class</span>
                     </div>
-                    <div class="class-card">
-                        <div class="class-icon">🔬</div>
+                    <div class='class-card science'>
+                        <div class='class-icon'>🔬</div>
                         <h3>Science</h3>
                         <p>Grade 4 - Lab 3</p>
-                        <span class="class-time">10:30 AM</span>
+                        <span class='class-time'>10:30 AM</span>
+                        <span class='class-status next'>Next: 45 min</span>
                     </div>
-                    <div class="class-card" onclick="window.open('chess.html', '_blank')">
-                        <div class="class-icon">♟️</div>
+                    <div class='class-card chess' onclick='window.open(\"chess.html\", \"_blank\")'>
+                        <div class='class-icon'>♟️</div>
                         <h3>Chess Club</h3>
                         <p>Strategy Games</p>
-                        <span class="class-time">3:00 PM</span>
+                        <span class='class-time'>3:00 PM</span>
+                        <span class='class-status later'>Later Today</span>
                     </div>
-                    <div class="class-card">
-                        <div class="class-icon">🎨</div>
+                    <div class='class-card art'>
+                        <div class='class-icon'>🎨</div>
                         <h3>Art Class</h3>
                         <p>Creative Expression</p>
-                        <span class="class-time">1:00 PM</span>
+                        <span class='class-time'>1:00 PM</span>
+                        <span class='class-status later'>After Lunch</span>
                     </div>
                 </div>
             </section>
 
             <!-- Learning Tools -->
-            <section class="learning-widget">
+            <section class='learning-widget'>
                 <h2>🎮 Learning Tools</h2>
-                <div class="tool-buttons">
-                    <button class="learning-btn" onclick="window.open('grade-4.html', '_blank')">
+                <div class='tool-buttons'>
+                    <button class='learning-btn primary' onclick='window.open(\"grade-4.html\", \"_blank\")'>
                         🎯 Math Games
                     </button>
-                    <button class="learning-btn" onclick="alert('Reading center opened')">
+                    <button class='learning-btn' onclick='alert(\"Reading center opened\")'>
                         📚 Reading Center
                     </button>
-                    <button class="learning-btn" onclick="alert('Homework helper launched')">
+                    <button class='learning-btn' onclick='alert(\"Homework helper launched\")'>
                         📝 Homework Help
                     </button>
-                    <button class="learning-btn" onclick="window.open('chess.html', '_blank')">
+                    <button class='learning-btn' onclick='window.open(\"chess.html\", \"_blank\")'>
                         ♟️ Chess Challenge
+                    </button>
+                    <button class='learning-btn' onclick='alert(\"Science experiments loaded\")'>
+                        🔬 Science Lab
+                    </button>
+                    <button class='learning-btn' onclick='alert(\"Creative studio opened\")'>
+                        🎨 Art Studio
                     </button>
                 </div>
             </section>
 
+            <!-- Today's Schedule -->
+            <section class='schedule-widget'>
+                <h2>📅 Today's Schedule</h2>
+                <div class='schedule-timeline'>
+                    <div class='schedule-item current'>
+                        <span class='time'>9:00 AM</span>
+                        <span class='subject'>Mathematics</span>
+                        <span class='location'>Room 12</span>
+                    </div>
+                    <div class='schedule-item'>
+                        <span class='time'>10:30 AM</span>
+                        <span class='subject'>Science</span>
+                        <span class='location'>Lab 3</span>
+                    </div>
+                    <div class='schedule-item break'>
+                        <span class='time'>12:00 PM</span>
+                        <span class='subject'>Lunch Break</span>
+                        <span class='location'>Cafeteria</span>
+                    </div>
+                    <div class='schedule-item'>
+                        <span class='time'>1:00 PM</span>
+                        <span class='subject'>Art Class</span>
+                        <span class='location'>Room 15</span>
+                    </div>
+                    <div class='schedule-item'>
+                        <span class='time'>3:00 PM</span>
+                        <span class='subject'>Chess Club</span>
+                        <span class='location'>Library</span>
+                    </div>
+                </div>
+            </section>
+
             <!-- Achievements -->
-            <section class="achievements-widget">
+            <section class='achievements-widget'>
                 <h2>🏆 My Achievements</h2>
-                <div class="achievements-grid">
-                    <div class="achievement earned">
-                        <span class="achievement-icon">⭐</span>
-                        <span class="achievement-text">Math Whiz</span>
+                <div class='achievements-grid'>
+                    <div class='achievement earned'>
+                        <span class='achievement-icon'>⭐</span>
+                        <span class='achievement-text'>Math Whiz</span>
                     </div>
-                    <div class="achievement earned">
-                        <span class="achievement-icon">📚</span>
-                        <span class="achievement-text">Book Reader</span>
+                    <div class='achievement earned'>
+                        <span class='achievement-icon'>📚</span>
+                        <span class='achievement-text'>Book Reader</span>
                     </div>
-                    <div class="achievement">
-                        <span class="achievement-icon">♟️</span>
-                        <span class="achievement-text">Chess Master</span>
+                    <div class='achievement'>
+                        <span class='achievement-icon'>♟️</span>
+                        <span class='achievement-text'>Chess Master</span>
                     </div>
-                    <div class="achievement">
-                        <span class="achievement-icon">🔬</span>
-                        <span class="achievement-text">Science Explorer</span>
+                    <div class='achievement'>
+                        <span class='achievement-icon'>🔬</span>
+                        <span class='achievement-text'>Science Explorer</span>
+                    </div>
+                    <div class='achievement earned'>
+                        <span class='achievement-icon'>🎯</span>
+                        <span class='achievement-text'>Perfect Attendance</span>
+                    </div>
+                    <div class='achievement'>
+                        <span class='achievement-icon'>🚀</span>
+                        <span class='achievement-text'>Homework Hero</span>
                     </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <script src="scripts/tracker-manager.js"></script>
+    <script src='scripts/tracker-manager.js'></script>
+    <script>
+    // Emergency button functionality
+    document.getElementById('emergency-btn').addEventListener('click', function() {
+        if (confirm('🚨 ARE YOU SURE YOU WANT TO SEND AN EMERGENCY ALERT?\n\nHelp will be notified immediately!')) {
+            alert('🚨 EMERGENCY ALERT SENT!\nHelp is on the way to your location!');
+            // In real implementation, this would trigger the trackerManager emergency function
+            if (window.trackerManager) {
+                window.trackerManager.triggerEmergencyAlert();
+            }
+        }
+    });
+
+    // Update last check-in time
+    function updateCheckinTime() {
+        document.getElementById('last-checkin').textContent = 'Just now';
+    }
+    setInterval(updateCheckinTime, 60000); // Update every minute
+    </script>
 </body>
 </html>
