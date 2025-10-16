@@ -1,74 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>MindFlow-AI - Parent Dashboard</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/tracker-integration.css">
-    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+    <link rel='stylesheet' href='styles/style.css'>
+    <link rel='stylesheet' href='styles/tracker-integration.css'>
+    <script src='https://cdn.socket.io/4.5.0/socket.io.min.js'></script>
 </head>
 <body>
-    <div class="dashboard-container">
-        <header class="dashboard-header">
+    <div class='dashboard-container'>
+        <header class='dashboard-header'>
             <h1>👨‍👩‍👧‍👦 Parent Dashboard</h1>
-            <div class="user-info">
-                <span id="connection-status" class="status-connected">Connected</span>
-                <span class="user-name">Parent User</span>
+            <div class='user-info'>
+                <span id='connection-status' class='status-connected'>🔴 Connecting...</span>
+                <span class='user-name'>Parent User</span>
             </div>
         </header>
 
-        <nav class="dashboard-nav">
-            <a href="index.html" class="nav-link">🏠 Home</a>
-            <a href="tracker/map.html" class="nav-link">🗺️ Live Tracker</a>
-            <a href="teacher.html" class="nav-link">👨‍🏫 Teacher Portal</a>
-            <a href="student.html" class="nav-link">🎓 Student View</a>
+        <nav class='dashboard-nav'>
+            <a href='index.html' class='nav-link'>🏠 Home</a>
+            <a href='tracker/map.html' class='nav-link'>🗺️ Live Tracker</a>
+            <a href='teacher.html' class='nav-link'>👨‍🏫 Teacher Portal</a>
+            <a href='student.html' class='nav-link'>🎓 Student View</a>
         </nav>
 
-        <main class="dashboard-main">
+        <main class='dashboard-main'>
             <!-- Alert Container -->
-            <div id="alert-container" class="alert-container"></div>
+            <div id='alert-container' class='alert-container'></div>
 
             <!-- SmartPath Tracker Widget -->
-            <section class="tracker-widget">
-                <div class="widget-header">
+            <section class='tracker-widget'>
+                <div class='widget-header'>
                     <h2>🛡️ SmartPath Child Tracking</h2>
-                    <button onclick="window.trackerManager.openTracker()" class="btn-primary">
+                    <button onclick='window.trackerManager.openTracker()' class='btn-primary'>
                         Open Full Map
                     </button>
                 </div>
                 
-                <div class="children-list">
-                    <div class="child-card" id="child-1">
-                        <div class="child-info">
-                            <span class="child-avatar">👦</span>
-                            <div class="child-details">
+                <div class='children-list'>
+                    <div class='child-card' id='child-1'>
+                        <div class='child-info'>
+                            <span class='child-avatar'>👦</span>
+                            <div class='child-details'>
                                 <h3>Khensani M.</h3>
                                 <p>Grade 4 - Room 12</p>
                             </div>
                         </div>
-                        <div class="child-status">
-                            <span id="child-status-1" class="status-indicator">📍 Location updating...</span>
-                            <div class="child-actions">
-                                <button onclick="window.trackerManager.openTracker('1')" class="btn-small">
+                        <div class='child-status'>
+                            <span id='child-status-1' class='status-indicator'>📍 Location updating...</span>
+                            <div class='child-actions'>
+                                <button onclick='window.trackerManager.openTracker(\"1\")' class='btn-small'>
                                     View Location
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="child-card" id="child-2">
-                        <div class="child-info">
-                            <span class="child-avatar">👧</span>
-                            <div class="child-details">
+                    <div class='child-card' id='child-2'>
+                        <div class='child-info'>
+                            <span class='child-avatar'>👧</span>
+                            <div class='child-details'>
                                 <h3>Lerato B.</h3>
                                 <p>Grade 3 - Room 8</p>
                             </div>
                         </div>
-                        <div class="child-status">
-                            <span id="child-status-2" class="status-indicator">📍 Location updating...</span>
-                            <div class="child-actions">
-                                <button onclick="window.trackerManager.openTracker('2')" class="btn-small">
+                        <div class='child-status'>
+                            <span id='child-status-2' class='status-indicator'>📍 Location updating...</span>
+                            <div class='child-actions'>
+                                <button onclick='window.trackerManager.openTracker(\"2\")' class='btn-small'>
                                     View Location
                                 </button>
                             </div>
@@ -76,57 +76,57 @@
                     </div>
                 </div>
 
-                <div class="safety-overview">
+                <div class='safety-overview'>
                     <h4>Safety Status</h4>
-                    <div class="safety-metrics">
-                        <div class="metric-card safe">
-                            <span class="metric-value" id="children-safe">2</span>
-                            <span class="metric-label">Children Safe</span>
+                    <div class='safety-metrics'>
+                        <div class='metric-card safe'>
+                            <span class='metric-value' id='children-safe'>2</span>
+                            <span class='metric-label'>Children Safe</span>
                         </div>
-                        <div class="metric-card present">
-                            <span class="metric-value" id="children-present">2</span>
-                            <span class="metric-label">At School</span>
+                        <div class='metric-card present'>
+                            <span class='metric-value' id='children-present'>2</span>
+                            <span class='metric-label'>At School</span>
                         </div>
-                        <div class="metric-card alerts">
-                            <span class="metric-value" id="alerts-today">0</span>
-                            <span class="metric-label">Alerts Today</span>
+                        <div class='metric-card alerts'>
+                            <span class='metric-value' id='alerts-today'>0</span>
+                            <span class='metric-label'>Alerts Today</span>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Academic Overview -->
-            <section class="academic-widget">
+            <section class='academic-widget'>
                 <h2>📚 Academic Progress</h2>
-                <div class="grades-overview">
-                    <div class="grade-item">
-                        <span class="subject">Mathematics</span>
-                        <span class="grade">A-</span>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 85%"></div>
+                <div class='grades-overview'>
+                    <div class='grade-item'>
+                        <span class='subject'>Mathematics</span>
+                        <span class='grade'>A-</span>
+                        <div class='progress-bar'>
+                            <div class='progress-fill' style='width: 85%'></div>
                         </div>
                     </div>
-                    <div class="grade-item">
-                        <span class="subject">Science</span>
-                        <span class="grade">B+</span>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 78%"></div>
+                    <div class='grade-item'>
+                        <span class='subject'>Science</span>
+                        <span class='grade'>B+</span>
+                        <div class='progress-bar'>
+                            <div class='progress-fill' style='width: 78%'></div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Quick Actions -->
-            <section class="actions-widget">
+            <section class='actions-widget'>
                 <h2>⚡ Quick Actions</h2>
-                <div class="action-buttons">
-                    <button class="action-btn" onclick="window.trackerManager.sendClassAlert('Message from parent')">
+                <div class='action-buttons'>
+                    <button class='action-btn' onclick='window.trackerManager.sendClassAlert(\"Message from parent\")'>
                         📧 Message Teacher
                     </button>
-                    <button class="action-btn" onclick="alert('Attendance report sent to email')">
+                    <button class='action-btn' onclick='alert(\"Attendance report sent to email\")'>
                         📊 View Attendance
                     </button>
-                    <button class="action-btn" onclick="window.open('grade-4.html', '_blank')">
+                    <button class='action-btn' onclick='window.open(\"grade-4.html\", \"_blank\")'>
                         🎮 Learning Games
                     </button>
                 </div>
@@ -134,6 +134,6 @@
         </main>
     </div>
 
-    <script src="scripts/tracker-manager.js"></script>
+    <script src='scripts/tracker-manager.js'></script>
 </body>
 </html>
