@@ -1,0 +1,566 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>MindFlow - Communication Hub</title>
+    <link rel='stylesheet' href='styles/style.css'>
+    <style>
+    .communication-hub {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        height: 100vh;
+        background: #f8f9fa;
+    }
+    
+    .contacts-sidebar {
+        background: white;
+        border-right: 2px solid #e9ecef;
+        overflow-y: auto;
+    }
+    
+    .chat-main {
+        display: flex;
+        flex-direction: column;
+        background: white;
+    }
+    
+    .contact-item {
+        padding: 1rem;
+        border-bottom: 1px solid #e9ecef;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .contact-item:hover {
+        background: #f8f9fa;
+    }
+    
+    .contact-item.active {
+        background: #e3f2fd;
+        border-left: 4px solid #2196f3;
+    }
+    
+    .contact-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+    
+    .contact-info {
+        flex: 1;
+    }
+    
+    .contact-name {
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .contact-status {
+        font-size: 0.8rem;
+        color: #666;
+    }
+    
+    .online-dot {
+        width: 8px;
+        height: 8px;
+        background: #4caf50;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+    }
+    
+    .chat-header {
+        padding: 1rem;
+        border-bottom: 2px solid #e9ecef;
+        background: white;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .chat-messages {
+        flex: 1;
+        padding: 1rem;
+        overflow-y: auto;
+        background: #f0f2f5;
+    }
+    
+    .message {
+        margin-bottom: 1rem;
+        max-width: 70%;
+    }
+    
+    .message.sent {
+        margin-left: auto;
+        text-align: right;
+    }
+    
+    .message-content {
+        background: white;
+        padding: 0.8rem 1rem;
+        border-radius: 18px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        display: inline-block;
+    }
+    
+    .message.sent .message-content {
+        background: #0084ff;
+        color: white;
+    }
+    
+    .message-time {
+        font-size: 0.7rem;
+        color: #666;
+        margin-top: 0.3rem;
+    }
+    
+    .chat-input {
+        padding: 1rem;
+        border-top: 2px solid #e9ecef;
+        background: white;
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .message-input {
+        flex: 1;
+        padding: 0.8rem 1rem;
+        border: 2px solid #e9ecef;
+        border-radius: 25px;
+        outline: none;
+        font-size: 1rem;
+    }
+    
+    .message-input:focus {
+        border-color: #667eea;
+    }
+    
+    .send-button {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+    
+    .notification-badge {
+        background: #ff4757;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: -5px;
+        right: -5px;
+    }
+    
+    .file-upload-btn {
+        background: transparent;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #667eea;
+    }
+    
+    .emergency-alert-btn {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        animation: pulse 2s infinite;
+    }
+    </style>
+</head>
+<body>
+    <div class='dashboard-container'>
+        <header class='dashboard-header'>
+            <h1>💬 Communication Hub</h1>
+            <div class='user-info'>
+                <span id='connectionStatus'>Connected</span>
+                <span class='user-name'>Messaging Center</span>
+            </div>
+        </header>
+
+        <nav class='dashboard-nav'>
+            <a href='index.html' class='nav-link'>🏠 Home</a>
+            <a href='teacher.html' class='nav-link'>👨‍🏫 Teacher Dashboard</a>
+            <a href='parent.html' class='nav-link'>👨‍👩‍👧‍👦 Parent Portal</a>
+            <a href='student.html' class='nav-link'>🎓 Student Hub</a>
+            <a href='attendance-portal.html' class='nav-link'>📊 Attendance</a>
+        </nav>
+
+        <main class='communication-hub'>
+            <!-- Contacts Sidebar -->
+            <div class='contacts-sidebar'>
+                <div style='padding: 1rem; border-bottom: 2px solid #e9ecef;'>
+                    <h3>Contacts</h3>
+                    <div style='display: flex; gap: 0.5rem; margin-top: 1rem;'>
+                        <button class='emergency-alert-btn' onclick='showEmergencyModal()'>
+                            🚨 Emergency Alert
+                        </button>
+                        <button class='btn-primary' onclick='showAbsenceModal()'>
+                            📝 Report Absence
+                        </button>
+                    </div>
+                </div>
+                
+                <div id='contactsList'>
+                    <!-- Contacts will be loaded here -->
+                    <div class='loading'>Loading contacts...</div>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class='chat-main'>
+                <div class='chat-header'>
+                    <div class='contact-avatar' id='currentContactAvatar'>👤</div>
+                    <div class='contact-info'>
+                        <div class='contact-name' id='currentContactName'>Select a contact to start chatting</div>
+                        <div class='contact-status' id='currentContactStatus'>Choose someone to message</div>
+                    </div>
+                </div>
+                
+                <div class='chat-messages' id='chatMessages'>
+                    <div style='text-align: center; color: #666; padding: 2rem;'>
+                        <div style='font-size: 3rem; margin-bottom: 1rem;'>💬</div>
+                        <h3>Welcome to MindFlow Messaging</h3>
+                        <p>Select a contact from the sidebar to start a conversation</p>
+                    </div>
+                </div>
+                
+                <div class='chat-input'>
+                    <button class='file-upload-btn' onclick='triggerFileUpload()' title='Attach file'>📎</button>
+                    <input type='file' id='fileUpload' style='display: none;' onchange='handleFileUpload(this.files[0])'>
+                    <input type='text' class='message-input' id='messageInput' placeholder='Type your message...' onkeypress='handleKeyPress(event)'>
+                    <button class='send-button' onclick='sendMessage()'>➤</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Emergency Alert Modal -->
+    <div id='emergencyModal' style='display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000;'>
+        <div style='background: white; margin: 10% auto; padding: 2rem; border-radius: 15px; max-width: 500px;'>
+            <h2 style='color: #dc3545;'>🚨 Emergency Alert</h2>
+            <p>This will send an immediate emergency notification to all relevant contacts.</p>
+            <select id='emergencyType' style='width: 100%; padding: 0.8rem; margin: 1rem 0; border: 2px solid #dc3545; border-radius: 8px;'>
+                <option value='medical'>Medical Emergency</option>
+                <option value='safety'>Safety Concern</option>
+                <option value='other'>Other Emergency</option>
+            </select>
+            <textarea id='emergencyDetails' placeholder='Provide details...' style='width: 100%; padding: 0.8rem; margin: 1rem 0; border: 2px solid #ddd; border-radius: 8px; height: 100px;'></textarea>
+            <div style='display: flex; gap: 1rem; justify-content: flex-end;'>
+                <button onclick='closeEmergencyModal()' class='btn-small'>Cancel</button>
+                <button onclick='sendEmergencyAlert()' class='emergency-alert-btn'>Send Emergency Alert</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Absence Report Modal -->
+    <div id='absenceModal' style='display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000;'>
+        <div style='background: white; margin: 10% auto; padding: 2rem; border-radius: 15px; max-width: 500px;'>
+            <h2>📝 Report Student Absence</h2>
+            <select id='absentStudent' style='width: 100%; padding: 0.8rem; margin: 1rem 0; border: 2px solid #667eea; border-radius: 8px;'>
+                <option value=''>Select Student</option>
+            </select>
+            <select id='absenceReason' style='width: 100%; padding: 0.8rem; margin: 1rem 0; border: 2px solid #667eea; border-radius: 8px;'>
+                <option value='illness'>Illness</option>
+                <option value='appointment'>Medical Appointment</option>
+                <option value='family'>Family Emergency</option>
+                <option value='other'>Other</option>
+            </select>
+            <textarea id='absenceNotes' placeholder='Additional notes...' style='width: 100%; padding: 0.8rem; margin: 1rem 0; border: 2px solid #ddd; border-radius: 8px; height: 80px;'></textarea>
+            <div style='display: flex; gap: 1rem; justify-content: flex-end;'>
+                <button onclick='closeAbsenceModal()' class='btn-small'>Cancel</button>
+                <button onclick='submitAbsenceReport()' class='btn-primary'>Report Absence</button>
+            </div>
+        </div>
+    </div>
+
+    <script src='scripts/khensani-assistant.js'></script>
+    <script src='scripts/communication-manager.js'></script>
+    <script>
+    let currentContact = null;
+    let isInitialized = false;
+
+    // Initialize communication hub
+    function initCommunicationHub() {
+        if (isInitialized) return;
+        
+        loadContacts();
+        setupEventListeners();
+        updateNotificationCounter();
+        
+        isInitialized = true;
+        console.log('💬 Communication Hub Initialized');
+    }
+
+    function loadContacts() {
+        const contacts = window.communicationManager.getContacts();
+        const contactsList = document.getElementById('contactsList');
+        
+        if (contacts.length === 0) {
+            contactsList.innerHTML = '<div class=\"loading\">No contacts available</div>';
+            return;
+        }
+
+        let html = '';
+        contacts.forEach(contact => {
+            html += \
+                <div class='contact-item' onclick='selectContact(\"\\")' id='contact-\'>
+                    <div class='contact-avatar'>\</div>
+                    <div class='contact-info'>
+                        <div class='contact-name'>\</div>
+                        <div class='contact-status'>
+                            \
+                        </div>
+                    </div>
+                    <div class='notification-badge' id='badge-\' style='display: none;'>1</div>
+                </div>
+            \;
+        });
+
+        contactsList.innerHTML = html;
+    }
+
+    function selectContact(contactId) {
+        currentContact = contactId;
+        
+        // Update UI
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        document.getElementById('contact-' + contactId).classList.add('active');
+        
+        // Load conversation
+        loadConversation(contactId);
+        
+        // Update header
+        const contact = window.communicationManager.contacts.get(contactId);
+        document.getElementById('currentContactAvatar').textContent = contact.avatar;
+        document.getElementById('currentContactName').textContent = contact.name;
+        document.getElementById('currentContactStatus').textContent = contact.online ? 'Online' : 'Offline';
+        
+        // Clear notifications for this contact
+        clearContactNotifications(contactId);
+    }
+
+    function loadConversation(contactId) {
+        const messages = window.communicationManager.getConversationHistory(contactId);
+        const chatMessages = document.getElementById('chatMessages');
+        
+        if (messages.length === 0) {
+            chatMessages.innerHTML = \
+                <div style='text-align: center; color: #666; padding: 2rem;'>
+                    <div style='font-size: 2rem; margin-bottom: 1rem;'>💭</div>
+                    <h3>No messages yet</h3>
+                    <p>Start a conversation with \</p>
+                </div>
+            \;
+            return;
+        }
+
+        let html = '';
+        messages.forEach(message => {
+            const isSent = message.from === window.communicationManager.currentUser.id;
+            const time = new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            html += \
+                <div class='message \'>
+                    <div class='message-content'>\</div>
+                    <div class='message-time'>\</div>
+                </div>
+            \;
+        });
+
+        chatMessages.innerHTML = html;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('messageInput');
+        const message = input.value.trim();
+        
+        if (!message || !currentContact) return;
+
+        if (window.communicationManager.sendMessage(currentContact, message)) {
+            input.value = '';
+            // Message will be added to UI via the communication manager
+        }
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    }
+
+    function triggerFileUpload() {
+        document.getElementById('fileUpload').click();
+    }
+
+    async function handleFileUpload(file) {
+        if (!file || !currentContact) return;
+        
+        await window.communicationManager.uploadFile(file, currentContact);
+    }
+
+    // Emergency System
+    function showEmergencyModal() {
+        document.getElementById('emergencyModal').style.display = 'block';
+    }
+
+    function closeEmergencyModal() {
+        document.getElementById('emergencyModal').style.display = 'none';
+    }
+
+    function sendEmergencyAlert() {
+        const type = document.getElementById('emergencyType').value;
+        const details = document.getElementById('emergencyDetails').value;
+        
+        alert(\🚨 EMERGENCY ALERT SENT!\\nType: \\\nDetails: \\\n\\nAll relevant contacts have been notified.\);
+        closeEmergencyModal();
+        
+        // Notify Khensani
+        if (window.khensani) {
+            window.khensani.addMessage('system', 'Emergency alert activated. Help is on the way.');
+        }
+    }
+
+    // Absence System
+    function showAbsenceModal() {
+        const select = document.getElementById('absentStudent');
+        select.innerHTML = '<option value=\"\">Select Student</option>';
+        
+        // Add students to dropdown
+        const contacts = window.communicationManager.getContacts();
+        contacts.forEach(contact => {
+            if (contact.role === 'student') {
+                select.innerHTML += \<option value=\"\\">\</option>\;
+            }
+        });
+        
+        document.getElementById('absenceModal').style.display = 'block';
+    }
+
+    function closeAbsenceModal() {
+        document.getElementById('absenceModal').style.display = 'none';
+    }
+
+    function submitAbsenceReport() {
+        const studentId = document.getElementById('absentStudent').value;
+        const reason = document.getElementById('absenceReason').value;
+        const notes = document.getElementById('absenceNotes').value;
+        
+        if (!studentId) {
+            alert('Please select a student');
+            return;
+        }
+
+        window.communicationManager.reportAbsence(studentId, \\: \\);
+        closeAbsenceModal();
+    }
+
+    // Global function for communication manager to call
+    window.updateChatUI = function(messageData) {
+        if (currentContact && (messageData.from === currentContact || messageData.to === currentContact)) {
+            loadConversation(currentContact);
+        }
+    }
+
+    function clearContactNotifications(contactId) {
+        const badge = document.getElementById('badge-' + contactId);
+        if (badge) {
+            badge.style.display = 'none';
+        }
+    }
+
+    function updateNotificationCounter() {
+        const unread = window.communicationManager.getUnreadCount();
+        // Update global notification counter if exists
+        const globalCounter = document.getElementById('notificationCounter');
+        if (globalCounter) {
+            globalCounter.textContent = unread > 0 ? unread : '';
+        }
+    }
+
+    function setupEventListeners() {
+        // Listen for new messages
+        setInterval(() => {
+            // In real implementation, this would be socket events
+            // For demo, we'll simulate occasional messages
+            if (Math.random() < 0.02) { // 2% chance every check
+                simulateIncomingMessage();
+            }
+        }, 5000);
+    }
+
+    function simulateIncomingMessage() {
+        const contacts = window.communicationManager.getContacts();
+        if (contacts.length === 0) return;
+        
+        const randomContact = contacts[Math.floor(Math.random() * contacts.length)];
+        if (randomContact.id === window.communicationManager.currentUser.id) return;
+
+        const messages = [
+            'Hello! How are you today?',
+            'Quick question about the assignment...',
+            'Can we schedule a meeting?',
+            'Important update about the class',
+            'Your child did great in class today!'
+        ];
+
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        
+        // Only simulate if not currently chatting with this contact
+        if (currentContact !== randomContact.id) {
+            window.communicationManager.receiveMessage({
+                id: Date.now(),
+                from: randomContact.id,
+                to: window.communicationManager.currentUser.id,
+                message: randomMessage,
+                timestamp: new Date(),
+                type: 'text'
+            });
+
+            // Show notification badge
+            const badge = document.getElementById('badge-' + randomContact.id);
+            if (badge) {
+                badge.style.display = 'flex';
+            }
+        }
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        initCommunicationHub();
+        
+        // Initialize Khensani
+        setTimeout(() => {
+            if (window.khensani) {
+                window.khensani.addMessage('system', 'Welcome to the Communication Hub! I can help you send messages, report absences, or handle emergencies.');
+            }
+        }, 1000);
+    });
+    </script>
+</body>
+</html>

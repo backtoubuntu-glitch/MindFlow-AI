@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>MindFlow - Attendance Portal</title>
+    <link rel='stylesheet' href='styles/style.css'>
+    <style>
+    .attendance-portal {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    
+    .attendance-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+    }
+    
+    .attendance-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .student-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    .student-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .attendance-status {
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+    
+    .status-present {
+        background: #d4edda;
+        color: #155724;
+    }
+    
+    .status-absent {
+        background: #f8d7da;
+        color: #721c24;
+    }
+    
+    .status-late {
+        background: #fff3cd;
+        color: #856404;
+    }
+    
+    .analytics-chart {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin: 1rem 0;
+        text-align: center;
+    }
+    
+    .chart-placeholder {
+        background: #f8f9fa;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        color: #666;
+    }
+    </style>
+</head>
+<body>
+    <div class='dashboard-container'>
+        <header class='dashboard-header'>
+            <h1>📊 Attendance Portal</h1>
+            <div class='user-info'>
+                <span id='attendanceDate'>Today: Loading...</span>
+                <span class='user-name'>Smart Tracking System</span>
+            </div>
+        </header>
+
+        <nav class='dashboard-nav'>
+            <a href='index.html' class='nav-link'>🏠 Home</a>
+            <a href='teacher.html' class='nav-link'>👨‍🏫 Teacher Dashboard</a>
+            <a href='communication-hub.html' class='nav-link'>💬 Messages</a>
+            <a href='student.html' class='nav-link'>🎓 Student Hub</a>
+            <a href='parent.html' class='nav-link'>👨‍👩‍👧‍👦 Parent Portal</a>
+        </nav>
+
+        <main class='attendance-portal'>
+            <!-- Quick Stats -->
+            <div class='attendance-grid'>
+                <div class='attendance-card'>
+                    <h3>📈 Today's Attendance</h3>
+                    <div style='font-size: 3rem; text-align: center; color: #28a745; margin: 1rem 0;'>92%</div>
+                    <div style='display: flex; justify-content: space-between;'>
+                        <span>Present: <strong>23</strong></span>
+                        <span>Absent: <strong style='color: #dc3545;'>2</strong></span>
+                        <span>Late: <strong style='color: #ffc107;'>1</strong></span>
+                    </div>
+                </div>
+                
+                <div class='attendance-card'>
+                    <h3>🎯 This Week</h3>
+                    <div style='font-size: 3rem; text-align: center; color: #17a2b8; margin: 1rem 0;'>94%</div>
+                    <div style='text-align: center; color: #666;'>
+                        Average Weekly Attendance
+                    </div>
+                </div>
+                
+                <div class='attendance-card'>
+                    <h3>🚨 Alerts</h3>
+                    <div style='font-size: 3rem; text-align: center; color: #dc3545; margin: 1rem 0;'>3</div>
+                    <div style='text-align: center;'>
+                        <button class='btn-primary' onclick='viewAlerts()'>View Alerts</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student List -->
+            <div class='attendance-card'>
+                <div style='display: flex; justify-content: between; align-items: center; margin-bottom: 1rem;'>
+                    <h3>👥 Class Roster - Grade 4</h3>
+                    <button class='btn-primary' onclick='takeAttendance()'>Take Attendance</button>
+                </div>
+                
+                <div id='studentList'>
+                    <div class='student-row'>
+                        <div class='student-info'>
+                            <div class='contact-avatar'>🎓</div>
+                            <div>
+                                <div class='contact-name'>Khensani M.</div>
+                                <div class='contact-status'>Present • On time</div>
+                            </div>
+                        </div>
+                        <div class='attendance-status status-present'>PRESENT</div>
+                    </div>
+                    
+                    <div class='student-row'>
+                        <div class='student-info'>
+                            <div class='contact-avatar'>👧</div>
+                            <div>
+                                <div class='contact-name'>Lerato B.</div>
+                                <div class='contact-status'>Present • Arrived 9:15 AM</div>
+                            </div>
+                        </div>
+                        <div class='attendance-status status-late'>LATE</div>
+                    </div>
+                    
+                    <div class='student-row'>
+                        <div class='student-info'>
+                            <div class='contact-avatar'>👦</div>
+                            <div>
+                                <div class='contact-name'>Thabo K.</div>
+                                <div class='contact-status'>Absent • No notification</div>
+                            </div>
+                        </div>
+                        <div class='attendance-status status-absent'>ABSENT</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics -->
+            <div class='attendance-card'>
+                <h3>📊 Attendance Analytics</h3>
+                <div class='analytics-chart'>
+                    <div class='chart-placeholder'>
+                        📈 Attendance Trends Chart<br>
+                        <small>(Would show weekly/monthly patterns)</small>
+                    </div>
+                </div>
+                <div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;'>
+                    <div style='text-align: center;'>
+                        <div style='font-size: 2rem; color: #28a745;'>98%</div>
+                        <div>Best Attendance</div>
+                    </div>
+                    <div style='text-align: center;'>
+                        <div style='font-size: 2rem; color: #dc3545;'>85%</div>
+                        <div>Needs Improvement</div>
+                    </div>
+                    <div style='text-align: center;'>
+                        <div style='font-size: 2rem; color: #17a2b8;'>12</div>
+                        <div>Perfect Attendance</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class='attendance-card'>
+                <h3>⚡ Quick Actions</h3>
+                <div style='display: flex; gap: 1rem; flex-wrap: wrap;'>
+                    <button class='btn-primary' onclick='location.href=\"communication-hub.html\"'>
+                        💬 Message Parents
+                    </button>
+                    <button class='btn-primary' onclick='generateReport()'>
+                        📄 Generate Report
+                    </button>
+                    <button class='emergency-alert-btn' onclick='alertAbsentStudents()'>
+                        🚨 Alert All Absent
+                    </button>
+                    <button class='btn-primary' onclick='exportData()'>
+                        📊 Export Data
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src='scripts/khensani-assistant.js'></script>
+    <script src='scripts/communication-manager.js'></script>
+    <script>
+    function updateDate() {
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('attendanceDate').textContent = now.toLocaleDateString('en-US', options);
+    }
+
+    function takeAttendance() {
+        alert('📝 Opening Attendance Manager...\\n\\nYou can now mark students present, absent, or late.\\nParents will be automatically notified of absences.');
+        
+        // Simulate Khensani assistance
+        if (window.khensani) {
+            window.khensani.addMessage('system', 'I can help you take attendance quickly! Would you like me to auto-detect present students using location data?');
+        }
+    }
+
+    function viewAlerts() {
+        alert('🚨 ATTENDANCE ALERTS:\\n\\n• Thabo K. - 3 absences this week\\n• Lerato B. - Frequently late on Mondays\\n• Parent notification needed for 2 students');
+    }
+
+    function generateReport() {
+        alert('📄 Generating Attendance Report...\\n\\nReport includes:\\n• Daily attendance summary\\n• Weekly trends\\n• Student patterns\\n• Parent notification log\\n\\nReport will be ready for download in a moment.');
+    }
+
+    function alertAbsentStudents() {
+        if (confirm('🚨 This will send absence alerts to all parents of absent students. Continue?')) {
+            alert('Alerts sent to parents of all absent students!\\n\\nParents will receive immediate notifications about their child\\'s absence.');
+            
+            if (window.khensani) {
+                window.khensani.addMessage('system', 'Absence alerts sent to parents! I\\'m monitoring for any responses or concerns.');
+            }
+        }
+    }
+
+    function exportData() {
+        alert('📊 Exporting Attendance Data...\\n\\nData exported in CSV format. Includes:\\n• Student attendance records\\n• Time stamps\\n• Attendance codes\\n• Teacher notes\\n\\nFile is ready for download!');
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        updateDate();
+        
+        // Simulate live updates
+        setInterval(() => {
+            // In real implementation, this would update from server
+            console.log('Updating attendance data...');
+        }, 30000);
+        
+        // Initialize Khensani
+        setTimeout(() => {
+            if (window.khensani) {
+                window.khensani.addMessage('system', 'Welcome to the Attendance Portal! I can help you track student presence, generate reports, and communicate with parents about absences.');
+            }
+        }, 1000);
+    });
+    </script>
+</body>
+</html>
