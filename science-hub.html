@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>MindFlow-AI - Science Learning Hub</title>
+    <link rel='stylesheet' href='styles/style.css'>
+    <link rel='stylesheet' href='styles/tracker-integration.css'>
+    <style>
+    .science-hub {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .science-header {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        margin: 20px 0;
+        text-align: center;
+    }
+    
+    .branch-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin: 30px 0;
+    }
+    
+    .branch-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    
+    .biology-card {
+        border-top: 5px solid #28a745;
+    }
+    
+    .chemistry-card {
+        border-top: 5px solid #17a2b8;
+    }
+    
+    .physics-card {
+        border-top: 5px solid #dc3545;
+    }
+    
+    .earth-science-card {
+        border-top: 5px solid #ffc107;
+    }
+    
+    .experiment-section {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 15px;
+        margin: 25px 0;
+    }
+    
+    .lab-equipment {
+        font-size: 3rem;
+        margin-bottom: 15px;
+    }
+    </style>
+</head>
+<body>
+    <div class='dashboard-container'>
+        <header class='dashboard-header'>
+            <h1>🔬 Science Learning Hub</h1>
+            <div class='user-info'>
+                <span>Explore Biology, Chemistry, Physics & Earth Science</span>
+            </div>
+        </header>
+
+        <nav class='dashboard-nav'>
+            <a href='index.html' class='nav-link'>🏠 Home</a>
+            <a href='grade-4.html' class='nav-link'>🎓 Grade 4 Hub</a>
+            <a href='advanced-technology.html' class='nav-link'>🚀 Technology Hub</a>
+            <a href='teacher.html' class='nav-link'>👨‍🏫 Teacher Portal</a>
+        </nav>
+
+        <main class='science-hub'>
+            <!-- Main Science Header -->
+            <section class='science-header'>
+                <h2>Welcome to the World of Science! 🌍</h2>
+                <p>Discover how our universe works through observation, experimentation, and discovery</p>
+            </section>
+
+            <!-- Scientific Method -->
+            <section class='branch-card'>
+                <h3>🔍 The Scientific Method</h3>
+                <p>Systematic approach to discovery and understanding</p>
+                <div class='experiment-section'>
+                    <strong>Steps:</strong>
+                    <ol style='text-align: left; margin: 15px 0;'>
+                        <li><strong>Observation:</strong> Notice something interesting</li>
+                        <li><strong>Question:</strong> Ask why or how it happens</li>
+                        <li><strong>Hypothesis:</strong> Make an educated guess</li>
+                        <li><strong>Experiment:</strong> Test your hypothesis</li>
+                        <li><strong>Conclusion:</strong> Analyze results and learn</li>
+                    </ol>
+                    <button onclick='showTopic(\"sci-scientific-method\")' class='btn-primary'>Learn More</button>
+                </div>
+            </section>
+
+            <!-- Science Branches Grid -->
+            <div class='branch-grid'>
+                <!-- Biology -->
+                <div class='branch-card biology-card'>
+                    <div class='lab-equipment'>🧬</div>
+                    <h3>Biology</h3>
+                    <p>The Study of Life</p>
+                    <ul style='text-align: left; margin: 15px 0;'>
+                        <li>Cells & Microorganisms</li>
+                        <li>Plants & Photosynthesis</li>
+                        <li>Animals & Ecosystems</li>
+                        <li>Human Body Systems</li>
+                    </ul>
+                    <button onclick='showTopic(\"bio-cells\")' class='btn-primary'>Explore Biology</button>
+                    <button onclick='showTopic(\"bio-photosynthesis\")' class='btn-small'>Plants</button>
+                </div>
+
+                <!-- Chemistry -->
+                <div class='branch-card chemistry-card'>
+                    <div class='lab-equipment'>⚗️</div>
+                    <h3>Chemistry</h3>
+                    <p>Matter & Its Changes</p>
+                    <ul style='text-align: left; margin: 15px 0;'>
+                        <li>States of Matter</li>
+                        <li>Atoms & Elements</li>
+                        <li>Chemical Reactions</li>
+                        <li>Acids & Bases</li>
+                    </ul>
+                    <button onclick='showTopic(\"chem-matter\")' class='btn-primary'>Explore Chemistry</button>
+                    <button onclick='showTopic(\"chem-reactions\")' class='btn-small'>Reactions</button>
+                </div>
+
+                <!-- Physics -->
+                <div class='branch-card physics-card'>
+                    <div class='lab-equipment'>🚀</div>
+                    <h3>Physics</h3>
+                    <p>Energy, Forces & Motion</p>
+                    <ul style='text-align: left; margin: 15px 0;'>
+                        <li>Forces & Motion</li>
+                        <li>Energy Types</li>
+                        <li>Electricity & Magnetism</li>
+                        <li>Light & Sound</li>
+                    </ul>
+                    <button onclick='showTopic(\"physics-forces\")' class='btn-primary'>Explore Physics</button>
+                    <button onclick='showTopic(\"physics-energy\")' class='btn-small'>Energy</button>
+                </div>
+
+                <!-- Earth Science -->
+                <div class='branch-card earth-science-card'>
+                    <div class='lab-equipment'>🌎</div>
+                    <h3>Earth & Space Science</h3>
+                    <p>Our Planet & Beyond</p>
+                    <ul style='text-align: left; margin: 15px 0;'>
+                        <li>Rocks & Minerals</li>
+                        <li>Weather & Climate</li>
+                        <li>Solar System</li>
+                        <li>Environmental Science</li>
+                    </ul>
+                    <button onclick='showTopic(\"sci-ecosystems\")' class='btn-primary'>Explore Earth Science</button>
+                    <button onclick='alert(\"Coming soon: Solar System exploration!\")' class='btn-small'>Space</button>
+                </div>
+            </div>
+
+            <!-- Hands-on Experiments Section -->
+            <section class='experiment-section'>
+                <h2>🧪 Hands-on Science Experiments</h2>
+                <div class='branch-grid'>
+                    <div class='branch-card'>
+                        <h4>Biology Experiments</h4>
+                        <ul>
+                            <li>Microscope cell observation</li>
+                            <li>Seed germination studies</li>
+                            <li>DNA extraction from fruit</li>
+                        </ul>
+                        <button onclick='startBioExperiment()' class='btn-primary'>Start Biology Lab</button>
+                    </div>
+                    
+                    <div class='branch-card'>
+                        <h4>Chemistry Experiments</h4>
+                        <ul>
+                            <li>pH testing with cabbage</li>
+                            <li>Baking soda volcanoes</li>
+                            <li>Crystal growing</li>
+                        </ul>
+                        <button onclick='startChemExperiment()' class='btn-primary'>Start Chemistry Lab</button>
+                    </div>
+                    
+                    <div class='branch-card'>
+                        <h4>Physics Experiments</h4>
+                        <ul>
+                            <li>Simple machine building</li>
+                            <li>Circuit construction</li>
+                            <li>Magnet exploration</li>
+                        </ul>
+                        <button onclick='startPhysicsExperiment()' class='btn-primary'>Start Physics Lab</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Science Careers -->
+            <section class='branch-card'>
+                <h2>💼 Science Careers</h2>
+                <div class='branch-grid'>
+                    <div class='project-showcase'>
+                        <h4>👨‍🔬 Research Scientist</h4>
+                        <p>Discover new knowledge through experiments</p>
+                    </div>
+                    <div class='project-showcase'>
+                        <h4>👩‍⚕️ Medical Doctor</h4>
+                        <p>Apply biology and chemistry to heal people</p>
+                    </div>
+                    <div class='project-showcase'>
+                        <h4>👨‍🚀 Aerospace Engineer</h4>
+                        <p>Use physics to explore space</p>
+                    </div>
+                    <div class='project-showcase'>
+                        <h4>👩‍🌾 Environmental Scientist</h4>
+                        <p>Protect our planet using earth science</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Topic Content Display -->
+            <div id='topicContent' class='topic-content'>
+                <!-- Topic content will be displayed here -->
+            </div>
+        </main>
+    </div>
+
+    <script src='curriculum/ai-search/search-engine.js'></script>
+    <script>
+    function showTopic(topicId) {
+        const topic = window.curriculumSearch.getTopicById(topicId);
+        const container = document.getElementById('topicContent');
+        
+        if (!topic) {
+            container.innerHTML = '<p>Topic not found.</p>';
+            return;
+        }
+
+        let html = \
+            <h3>\</h3>
+            <p>\</p>
+            <h4>Examples & Applications:</h4>
+            <ul>
+        \;
+        
+        topic.examples.forEach(example => {
+            html += \<li>\</li>\;
+        });
+        
+        html += '</ul>';
+        
+        // Show related topics
+        const related = window.curriculumSearch.getRelatedTopics(topicId);
+        if (related.length > 0) {
+            html += '<h4>Related Topics:</h4>';
+            related.forEach(relatedTopic => {
+                html += \<button onclick='showTopic(\"\\")' class='btn-small'>\</button> \;
+            });
+        }
+
+        container.style.display = 'block';
+        container.innerHTML = html;
+    }
+
+    function startBioExperiment() {
+        alert('🧬 Starting Biology Lab!\\n\\nGet your microscope ready!\\nWe will examine plant cells and learn about living organisms!');
+        // Biology experiment simulation
+    }
+
+    function startChemExperiment() {
+        alert('⚗️ Starting Chemistry Lab!\\n\\nPut on your safety goggles!\\nWe will mix substances and observe chemical reactions!');
+        // Chemistry experiment simulation
+    }
+
+    function startPhysicsExperiment() {
+        alert('🚀 Starting Physics Lab!\\n\\nPrepare for motion and energy!\\nWe will build circuits and test simple machines!');
+        // Physics experiment simulation
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Science Learning Hub Loaded');
+    });
+    </script>
+</body>
+</html>
