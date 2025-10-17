@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const socketIO = require('socket.io');
 const http = require('http');
 const cors = require('cors');
@@ -8,8 +8,8 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server, {
     cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
+        origin: \"*\",
+        methods: [\"GET\", \"POST\"]
     }
 });
 
@@ -18,17 +18,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Store student locations in memory (for demo)
-// In production, use Redis or database
+// Store student locations in memory
 const studentLocations = new Map();
 
 // Socket.io connection handling
 io.on('connection', (socket) => {
     console.log('🔗 New connection:', socket.id);
-    
+
     // Send current locations to new client
     socket.emit('all-locations', Array.from(studentLocations.entries()));
-    
+
     // Handle student location updates
     socket.on('student-location', (data) => {
         console.log('📍 Location update:', data.studentId, data.location);
@@ -39,21 +38,38 @@ io.on('connection', (socket) => {
             socketId: socket.id,
             lastUpdate: new Date().toISOString()
         });
-        
+
         // Broadcast to all connected clients
         io.emit('location-update', data);
     });
-    
+
     // Handle location requests
     socket.on('get-locations', () => {
         socket.emit('all-locations', Array.from(studentLocations.entries()));
     });
-    
+
+    // Handle emergency alerts
+    socket.on('emergency-alert', (data) => {
+        console.log('🚨 EMERGENCY ALERT:', data);
+        io.emit('emergency-alert', data);
+    });
+
+    // Handle class alerts (teacher broadcasts)
+    socket.on('class-alert', (data) => {
+        console.log('📢 CLASS ALERT:', data);
+        io.emit('class-alert', data);
+    });
+
+    // Handle user registration
+    socket.on('user-register', (data) => {
+        console.log('👤 User registered:', data.userType, data.userId);
+    });
+
     // Handle disconnection
     socket.on('disconnect', () => {
         console.log('❌ Disconnected:', socket.id);
         
-        // Remove locations for this socket (optional)
+        // Remove locations for this socket
         for (let [studentId, location] of studentLocations.entries()) {
             if (location.socketId === socket.id) {
                 studentLocations.delete(studentId);
@@ -64,10 +80,11 @@ io.on('connection', (socket) => {
 
 // HTTP Routes
 app.get('/', (req, res) => {
-    res.json({ 
+    res.json({
         message: 'SmartPath with Khensani - Tracking Server',
         status: 'Running',
-        studentsTracked: studentLocations.size
+        studentsTracked: studentLocations.size,
+        connections: io.engine.clientsCount
     });
 });
 
@@ -76,17 +93,19 @@ app.get('/api/locations', (req, res) => {
 });
 
 app.get('/api/health', (req, res) => {
-    res.json({ 
+    res.json({
         status: 'healthy',
         timestamp: new Date().toISOString(),
-        connections: io.engine.clientsCount
+        connections: io.engine.clientsCount,
+        studentsTracked: studentLocations.size
     });
 });
 
 // Start server
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-    console.log(`🚀 SmartPath Server running on port ${PORT}`);
-    console.log(`📍 API Health: http://localhost:${PORT}/api/health`);
-    console.log(`🗺️ Locations API: http://localhost:${PORT}/api/locations`);
+    console.log(\🚀 SmartPath Server running on port \\);
+    console.log(\📍 API Health: http://localhost:\/api/health\);
+    console.log(\🗺️ Locations API: http://localhost:\/api/locations\);
+    console.log(\🌐 WebSocket: ws://localhost:\\);
 });

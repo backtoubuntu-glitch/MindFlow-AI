@@ -1,12 +1,11 @@
-// SmartPath with Khensani - Real-time Tracker
-class SmartPathTracker {
+﻿// SmartPath Tracker - Live Map Operations
+class SmartPathMapTracker {
     constructor() {
         this.map = null;
         this.socket = null;
         this.studentMarkers = new Map();
         this.isTracking = false;
         this.simulationInterval = null;
-        
         this.init();
     }
 
@@ -17,9 +16,9 @@ class SmartPathTracker {
     }
 
     initializeMap() {
-        // Centered on a typical school location (adjust coordinates as needed)
+        // Center on school location (adjust coordinates as needed)
         this.map = L.map('map').setView([-25.7489, 28.2295], 16);
-
+        
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(this.map);
@@ -31,7 +30,7 @@ class SmartPathTracker {
             [-25.7480, 28.2315],
             [-25.7480, 28.2285]
         ];
-
+        
         this.schoolZone = L.polygon(schoolBounds, {
             color: 'green',
             fillColor: 'green',
@@ -39,7 +38,7 @@ class SmartPathTracker {
             weight: 2
         }).addTo(this.map);
 
-        // Add school building
+        // Add school building marker
         L.marker([-25.7489, 28.2295])
             .addTo(this.map)
             .bindPopup('🏫 Main School Building')
@@ -47,8 +46,8 @@ class SmartPathTracker {
     }
 
     connectToServer() {
-        // Connect to our backend server
-        this.socket = io('https://your-server.railway.app'); // Update with your server URL
+        // Connect to backend server (update URL when deployed)
+        this.socket = io('https://your-smartpath-server.railway.app');
         
         this.socket.on('connect', () => {
             this.updateStatus('Connected to SmartPath network');
@@ -86,7 +85,7 @@ class SmartPathTracker {
                 })
             }).addTo(this.map);
             
-            marker.bindPopup(`<b>Student ${studentId}</b><br>Tracked by SmartPath`);
+            marker.bindPopup(\<b>Student \</b><br>Tracked by SmartPath\);
             this.studentMarkers.set(studentId, marker);
         }
 
@@ -98,12 +97,12 @@ class SmartPathTracker {
     }
 
     updateStudentInfo(studentId, location) {
-        const studentElement = document.getElementById(`student${studentId}`);
+        const studentElement = document.getElementById(\student\\);
         if (studentElement) {
             const locationElement = studentElement.querySelector('.location');
             const timeElement = studentElement.querySelector('.time');
             
-            locationElement.textContent = `${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}`;
+            locationElement.textContent = \\, \\;
             timeElement.textContent = new Date().toLocaleTimeString();
         }
     }
@@ -115,7 +114,7 @@ class SmartPathTracker {
     }
 
     triggerSafetyAlert(studentId, location) {
-        alert(`🚨 SAFETY ALERT: Student ${studentId} left school zone!`);
+        alert(\🚨 SAFETY ALERT: Student \ left school zone!\);
         
         // Visual alert on map
         const marker = this.studentMarkers.get(studentId);
@@ -129,7 +128,7 @@ class SmartPathTracker {
     }
 
     // REAL GPS TRACKING
-    async startRealTracking() {
+    startRealTracking() {
         if (!navigator.geolocation) {
             alert('GPS not supported on this device');
             return;
@@ -138,8 +137,7 @@ class SmartPathTracker {
         this.isTracking = true;
         this.updateStatus('Active GPS Tracking - Live');
 
-        // For demo purposes, we'll simulate multiple students
-        // In real app, each device would have unique student ID
+        // For demo purposes, simulate multiple students
         const studentIds = ['1', '2'];
         
         studentIds.forEach(studentId => {
@@ -158,7 +156,7 @@ class SmartPathTracker {
                             location: location
                         });
                     }
-                    
+
                     // Update locally
                     this.updateStudentLocation(studentId, location);
                 },
@@ -180,7 +178,7 @@ class SmartPathTracker {
     startSimulation() {
         this.isTracking = true;
         this.updateStatus('Demo Simulation Active');
-        
+
         const studentIds = ['1', '2'];
         const baseLocations = {
             '1': [-25.7489, 28.2295],
@@ -224,35 +222,30 @@ class SmartPathTracker {
     }
 
     updateStatus(message) {
-        document.getElementById('status').textContent = `Status: ${message}`;
+        document.getElementById('status').textContent = \Status: \\;
     }
 
     setupEventListeners() {
-        document.getElementById('startBtn').addEventListener('click', () => {
-            this.startRealTracking();
-        });
-
-        document.getElementById('simulateBtn').addEventListener('click', () => {
-            this.startSimulation();
-        });
+        // Event listeners are handled by global functions
     }
 }
 
 // Initialize tracker when page loads
-let tracker;
+let mapTracker;
+
 document.addEventListener('DOMContentLoaded', () => {
-    tracker = new SmartPathTracker();
+    mapTracker = new SmartPathMapTracker();
 });
 
 // Global functions for HTML buttons
 function startRealTracking() {
-    if (tracker) tracker.startRealTracking();
+    if (mapTracker) mapTracker.startRealTracking();
 }
 
 function startSimulation() {
-    if (tracker) tracker.startSimulation();
+    if (mapTracker) mapTracker.startSimulation();
 }
 
 function stopTracking() {
-    if (tracker) tracker.stopTracking();
+    if (mapTracker) mapTracker.stopTracking();
 }

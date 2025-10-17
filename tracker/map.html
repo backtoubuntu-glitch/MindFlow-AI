@@ -1,47 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>SmartPath with Khensani - Live Student Tracking</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="tracker.css">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#667eea">
+    <link rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' />
+    <link rel='stylesheet' href='../styles/tracker-integration.css'>
+    <link rel='manifest' href='manifest.json'>
+    <meta name='theme-color' content='#667eea'>
+    <style>
+        #map { height: 70vh; width: 100%; }
+        .tracker-controls { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            z-index: 1000; 
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .student-list {
+            background: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="header">
+    <div class='header'>
         <h1>🛡️ SmartPath with Khensani</h1>
         <p>Live Student Safety Tracking</p>
     </div>
-    
-    <div id="map"></div>
-    
-    <div class="controls">
-        <button id="startBtn" onclick="startRealTracking()">📍 Start SmartPath Tracking</button>
-        <button id="simulateBtn" onclick="startSimulation()">🎮 Demo Simulation</button>
-        <div class="status" id="status">Status: Ready to track</div>
+
+    <div class='tracker-controls'>
+        <button onclick='startRealTracking()' class='btn-primary'>📍 Start Live Tracking</button>
+        <button onclick='startSimulation()' class='btn-small'>🎮 Demo Mode</button>
+        <button onclick='stopTracking()' class='btn-small'>⏹️ Stop</button>
+        <div class='status' id='status'>Status: Ready</div>
     </div>
-    
-    <div class="info-panel">
+
+    <div id='map'></div>
+
+    <div class='student-list'>
         <h3>👥 Tracked Students</h3>
-        <div id="studentsList">
-            <div class="student" id="student1">
-                <span class="name">Khensani M.</span>
-                <span class="location" id="loc1">-25.7489, 28.2295</span>
-                <span class="time" id="time1">Just now</span>
+        <div id='students-list'>
+            <div class='student' id='student1'>
+                <span class='name'>Khensani M.</span>
+                <span class='location' id='loc1'>-25.7489, 28.2295</span>
+                <span class='time' id='time1'>Just now</span>
             </div>
-            <div class="student" id="student2">
-                <span class="name">Thabo B.</span>
-                <span class="location" id="loc2">-25.7485, 28.2302</span>
-                <span class="time" id="time2">Just now</span>
+            <div class='student' id='student2'>
+                <span class='name'>Thabo B.</span>
+                <span class='location' id='loc2'>-25.7485, 28.2302</span>
+                <span class='time' id='time2'>Just now</span>
             </div>
         </div>
     </div>
 
     <!-- CDN Libraries -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
-    <script src="tracker.js"></script>
+    <script src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'></script>
+    <script src='https://cdn.socket.io/4.5.0/socket.io.min.js'></script>
+    <script src='tracker.js'></script>
 </body>
 </html>
