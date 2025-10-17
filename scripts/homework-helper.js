@@ -315,4 +315,4 @@ class HomeworkHelper {
 }
 
 // Global instance
-window.homeworkHelper = new HomeworkHelper();
+window.homeworkHelper = new HomeworkHelper(); 
