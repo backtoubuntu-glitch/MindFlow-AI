@@ -255,4 +255,4 @@ class KhensaniAssistant {
 // Initialize Khensani when page loads
 document.addEventListener('DOMContentLoaded', function() {
     window.khensani = new KhensaniAssistant();
-});
+}); 
