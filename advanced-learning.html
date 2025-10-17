@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>MindFlow - Advanced Learning Hub</title>
+    <link rel='stylesheet' href='styles/style.css'>
+    <style>
+    .learning-hub {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+    }
+    
+    .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: all 0.3s ease;
+        border-top: 5px solid #8B5FBF;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .progress-section {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin: 2rem 0;
+    }
+    
+    .progress-bar {
+        background: #f0f0f0;
+        border-radius: 10px;
+        height: 20px;
+        margin: 1rem 0;
+        overflow: hidden;
+    }
+    
+    .progress-fill {
+        background: linear-gradient(135deg, #4CAF50, #45a049);
+        height: 100%;
+        border-radius: 10px;
+        transition: width 0.5s ease;
+    }
+    
+    .quick-action {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 0.5rem 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .quick-action:hover {
+        background: #e9ecef;
+        transform: translateX(5px);
+    }
+    </style>
+</head>
+<body>
+    <div class='dashboard-container'>
+        <header class='dashboard-header'>
+            <h1>🚀 Advanced Learning Hub</h1>
+            <div class='user-info'>
+                <span>Powered by Khensani AI</span>
+            </div>
+        </header>
+
+        <nav class='dashboard-nav'>
+            <a href='index.html' class='nav-link'>🏠 Home</a>
+            <a href='grade-4.html' class='nav-link'>🎓 Grade 4 Hub</a>
+            <a href='science-hub.html' class='nav-link'>🔬 Science</a>
+            <a href='communication-hub.html' class='nav-link'>💬 Messages</a>
+            <a href='teacher.html' class='nav-link'>👨‍🏫 Teacher View</a>
+        </nav>
+
+        <main class='learning-hub'>
+            <!-- Welcome Section -->
+            <div class='widget' style='text-align: center;'>
+                <h1 style='color: #8B5FBF; margin-bottom: 1rem;'>Welcome to Your Learning Journey! 🎓</h1>
+                <p style='font-size: 1.2rem; color: #666;'>
+                    Discover AI-powered tools to accelerate your learning and make education exciting!
+                </p>
+            </div>
+
+            <!-- AI Features Grid -->
+            <div class='feature-grid'>
+                <!-- Homework Helper -->
+                <div class='feature-card' onclick='showHomeworkHelper()'>
+                    <div class='feature-icon'>🧠</div>
+                    <h3>AI Homework Helper</h3>
+                    <p>Get step-by-step solutions and explanations for any problem</p>
+                    <div class='quick-action' onclick='event.stopPropagation(); promptHomeworkHelp()'>
+                        💡 Get Help with Homework
+                    </div>
+                    <div class='quick-action' onclick='event.stopPropagation(); window.homeworkHelper.showHelpModal()'>
+                        🆘 Quick Help (Ctrl+H)
+                    </div>
+                </div>
+
+                <!-- Learning Paths -->
+                <div class='feature-card' onclick='showLearningPaths()'>
+                    <div class='feature-icon'>🎯</div>
+                    <h3>Personalized Learning Paths</h3>
+                    <p>AI-generated learning journeys tailored just for you</p>
+                    <div class='quick-action' onclick='event.stopPropagation(); generateNewPath()'>
+                        🚀 Start New Learning Path
+                    </div>
+                    <div class='quick-action' onclick='event.stopPropagation(); viewProgress()'>
+                        📊 View My Progress
+                    </div>
+                </div>
+
+                <!-- Virtual Science Lab -->
+                <div class='feature-card' onclick='showScienceLab()'>
+                    <div class='feature-icon'>🔬</div>
+                    <h3>Virtual Science Lab</h3>
+                    <p>Conduct safe, interactive science experiments online</p>
+                    <div class='quick-action' onclick='event.stopPropagation(); startMicroscopeExperiment()'>
+                        🔬 Cell Observation
+                    </div>
+                    <div class='quick-action' onclick='event.stopPropagation(); startChemistryExperiment()'>
+                        🧪 Chemical Reactions
+                    </div>
+                </div>
+
+                <!-- Collaborative Learning -->
+                <div class='feature-card' onclick='showCollaborativeSpaces()'>
+                    <div class='feature-icon'>👥</div>
+                    <h3>Collaborative Spaces</h3>
+                    <p>Learn together with classmates in virtual study groups</p>
+                    <div class='quick-action' onclick='event.stopPropagation(); joinStudyGroup()'>
+                        📚 Join Study Group
+                    </div>
+                    <div class='quick-action' onclick='event.stopPropagation(); startProject()'>
+                        🎨 Start Group Project
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Tracking -->
+            <div class='progress-section'>
+                <h2>📈 My Learning Progress</h2>
+                <div id='progressDisplay'>
+                    <div class='loading'>Loading your learning progress...</div>
+                </div>
+            </div>
+
+            <!-- Khensani Recommendations -->
+            <div class='widget'>
+                <h2>💡 Khensani's Recommendations</h2>
+                <div id='recommendationsList'>
+                    <div class='loading'>Khensani is analyzing your learning patterns...</div>
+                </div>
+            </div>
+
+            <!-- Quick Access Tools -->
+            <div class='widget'>
+                <h2>⚡ Quick Access Tools</h2>
+                <div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;'>
+                    <button class='btn-primary' onclick='openAIChat()'>
+                        💬 Chat with Khensani
+                    </button>
+                    <button class='btn-primary' onclick='openMathGames()'>
+                        🎮 Math Games
+                    </button>
+                    <button class='btn-primary' onclick='openScienceSimulations()'>
+                        🌟 Science Sims
+                    </button>
+                    <button class='btn-primary' onclick='openCodingPlayground()'>
+                        💻 Coding Playground
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src='scripts/khensani-assistant.js'></script>
+    <script src='scripts/homework-helper.js'></script>
+    <script src='scripts/learning-path.js'></script>
+    <script src='scripts/science-lab.js'></script>
+    <script>
+    // Initialize the learning hub
+    function initLearningHub() {
+        loadProgress();
+        loadRecommendations();
+        setupQuickActions();
+        
+        console.log('🚀 Advanced Learning Hub Initialized');
+    }
+
+    function loadProgress() {
+        const progressDisplay = document.getElementById('progressDisplay');
+        
+        if (window.learningPath) {
+            const progress = window.learningPath.getCurrentProgress();
+            const profile = window.learningPath.getStudentProfile();
+            
+            if (progress.size === 0) {
+                progressDisplay.innerHTML = \
+                    <div style='text-align: center; padding: 2rem; color: #666;'>
+                        <div style='font-size: 3rem; margin-bottom: 1rem;'>🎯</div>
+                        <h3>Start Your Learning Journey!</h3>
+                        <p>You haven't started any learning paths yet.</p>
+                        <button class='btn-primary' onclick='generateNewPath()'>Begin Learning</button>
+                    </div>
+                \;
+            } else {
+                let html = \
+                    <div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;'>
+                \;
+                
+                progress.forEach((moduleProgress, moduleId) => {
+                    html += \
+                        <div style='background: #f8f9fa; padding: 1rem; border-radius: 10px;'>
+                            <div style='display: flex; justify-content: space-between; margin-bottom: 0.5rem;'>
+                                <strong>Module</strong>
+                                <span>\%</span>
+                            </div>
+                            <div class='progress-bar'>
+                                <div class='progress-fill' style='width: \%'></div>
+                            </div>
+                            <div style='font-size: 0.8rem; color: #666;'>
+                                \
+                            </div>
+                        </div>
+                    \;
+                });
+                
+                html += '</div>';
+                progressDisplay.innerHTML = html;
+            }
+        }
+    }
+
+    function loadRecommendations() {
+        const recommendationsList = document.getElementById('recommendationsList');
+        
+        if (window.learningPath) {
+            const recommendations = window.learningPath.getRecommendations();
+            
+            if (recommendations.length === 0) {
+                recommendationsList.innerHTML = '<p>No recommendations at this time. Keep learning!</p>';
+                return;
+            }
+            
+            let html = '';
+            recommendations.forEach(rec => {
+                const priorityColor = rec.priority === 'high' ? '#dc3545' : rec.priority === 'medium' ? '#ffc107' : '#17a2b8';
+                
+                html += \
+                    <div class='quick-action' style='border-left: 4px solid \;' onclick='followRecommendation(\"\\")'>
+                        <div style='display: flex; justify-content: space-between; align-items: center;'>
+                            <div>
+                                <strong>\</strong>
+                                <div style='font-size: 0.9rem; color: #666;'>\</div>
+                            </div>
+                            <span style='background: \; color: white; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.7rem;'>
+                                \
+                            </span>
+                        </div>
+                    </div>
+                \;
+            });
+            
+            recommendationsList.innerHTML = html;
+        }
+    }
+
+    function setupQuickActions() {
+        // Set up keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'h') {
+                e.preventDefault();
+                window.homeworkHelper.showHelpModal();
+            }
+        });
+    }
+
+    // Feature Actions
+    function showHomeworkHelper() {
+        const problem = prompt('What problem do you need help with?');
+        if (problem) {
+            window.homeworkHelper.solveProblem(problem, 'math');
+        }
+    }
+
+    function promptHomeworkHelp() {
+        const subject = prompt('What subject do you need help with? (math, science, etc.)', 'math');
+        const problem = prompt('What specific problem or concept?');
+        
+        if (subject && problem) {
+            window.homeworkHelper.solveProblem(problem, subject);
+        }
+    }
+
+    function showLearningPaths() {
+        alert('🎯 Opening Learning Path Manager...\\n\\nHere you can:\\n• View your current learning paths\\n• Start new personalized paths\\n• Track your progress\\n• Get AI recommendations');
+        
+        // In full implementation, this would open a learning path modal
+        if (window.learningPath) {
+            const path = window.learningPath.generateLearningPath();
+            alert(\🚀 New Learning Path Created!\\n\\n\\\n\\n\\\n\\nDuration: \\\n\\nYour personalized learning journey begins now!\);
+        }
+    }
+
+    function generateNewPath() {
+        const goal = prompt('What is your learning goal?', 'improve-math');
+        if (goal && window.learningPath) {
+            const path = window.learningPath.generateLearningPath(goal);
+            alert(\🎯 Your Personalized Learning Path:\\n\\n\\\n\\n\\\n\\nDuration: \\\n\\nModules: \\\n\\nLet's start learning!\);
+        }
+    }
+
+    function viewProgress() {
+        alert('📊 Your Learning Progress\\n\\nOpening detailed progress analytics...\\n\\nThis would show:\\n• Module completion rates\\n• Skill development\\n• Time spent learning\\n• Achievement badges\\n• Growth over time');
+    }
+
+    function showScienceLab() {
+        alert('🔬 Virtual Science Lab\\n\\nOpening your personal laboratory...\\n\\nChoose from available experiments or create your own!');
+        
+        // In full implementation, this would open the science lab
+        setTimeout(() => {
+            window.scienceLab.startExperimentById('microscope-cells');
+        }, 1000);
+    }
+
+    function startMicroscopeExperiment() {
+        window.scienceLab.startExperimentById('microscope-cells');
+    }
+
+    function startChemistryExperiment() {
+        window.scienceLab.startExperimentById('chemical-reactions');
+    }
+
+    function showCollaborativeSpaces() {
+        alert('👥 Collaborative Learning Spaces\\n\\nOpening virtual study environments...\\n\\nFeatures include:\\n• Real-time group projects\\n• Peer-to-peer help\\n• Teacher-moderated discussions\\n• Shared whiteboards\\n• File sharing');
+    }
+
+    function joinStudyGroup() {
+        alert('📚 Joining Study Group...\\n\\nFinding active study groups for your subjects...\\n\\nYou would be connected with classmates working on similar topics!');
+    }
+
+    function startProject() {
+        alert('🎨 Starting Group Project...\\n\\nSet up a collaborative project space where you can:\\n• Invite classmates\\n• Share resources\\n• Track progress\\n• Get teacher feedback');
+    }
+
+    function followRecommendation(type) {
+        switch(type) {
+            case 'start-journey':
+                generateNewPath();
+                break;
+            case 'improve-skill':
+                alert('📈 Opening skill improvement tools...');
+                break;
+            case 'explore-interest':
+                alert('🌟 Exploring your interests...');
+                break;
+            default:
+                alert('Implementing recommendation...');
+        }
+    }
+
+    function openAIChat() {
+        if (window.khensani) {
+            window.khensani.toggleChat();
+        }
+    }
+
+    function openMathGames() {
+        alert('🎮 Opening Math Games...\\n\\nLoading interactive math challenges and puzzles!');
+    }
+
+    function openScienceSimulations() {
+        alert('🌟 Opening Science Simulations...\\n\\nLoading interactive science models and virtual experiments!');
+    }
+
+    function openCodingPlayground() {
+        alert('💻 Opening Coding Playground...\\n\\nLoading interactive coding environment with tutorials!');
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        initLearningHub();
+        
+        // Initialize Khensani with learning-focused welcome
+        setTimeout(() => {
+            if (window.khensani) {
+                window.khensani.addMessage('system', 'Welcome to the Advanced Learning Hub! I\\'m here to help you with homework, guide your learning path, and make education exciting. What would you like to learn today?');
+            }
+        }, 1000);
+    });
+
+    // Global function for progress updates
+    window.updateLearningProgress = function(progress) {
+        loadProgress();
+    };
+    </script>
+</body>
+</html>
