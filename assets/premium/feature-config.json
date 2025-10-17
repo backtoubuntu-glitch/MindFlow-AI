@@ -1,0 +1,41 @@
+{
+  "premiumFeatures": {
+    "growth_tier": {
+      "price_monthly": 99,
+      "price_yearly": 999,
+      "features": [
+        "voice_ai_companion",
+        "smart_routines", 
+        "mood_tracker",
+        "brain_breaks",
+        "enhanced_rewards",
+        "bilingual_support",
+        "caps_content",
+        "learning_analytics"
+      ]
+    },
+    "family_tier": {
+      "price_monthly": 149,
+      "price_yearly": 1499,
+      "features": [
+        "multiple_profiles",
+        "memory_box",
+        "family_analytics",
+        "collaborative_challenges",
+        "premium_rewards",
+        "priority_support"
+      ]
+    }
+  },
+  "rewards_catalog": {
+    "digital_rewards": [
+      {"id": "badge_gold", "name": "Gold Learning Badge", "points": 100},
+      {"id": "badge_silver", "name": "Silver Achievement Badge", "points": 50},
+      {"id": "sticker_pack", "name": "Digital Sticker Pack", "points": 25}
+    ],
+    "physical_rewards": [
+      {"id": "book_voucher", "name": "Exclusive Book Voucher", "points": 500},
+      {"id": "science_kit", "name": "Mini Science Experiment Kit", "points": 1000}
+    ]
+  }
+}

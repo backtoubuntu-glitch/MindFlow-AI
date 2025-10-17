@@ -1,0 +1,19 @@
+{
+  "offlinePages": [
+    "/index.html",
+    "/advanced-learning.html",
+    "/mobile-learning.html"
+  ],
+  "offlineMessages": {
+    "welcome": "Welcome to MindFlow AI - Learning in offline mode!",
+    "homeworkHelp": "I can still help with basic homework questions while offline.",
+    "safetyInfo": "Emergency features remain available offline."
+  },
+  "cachedResources": [
+    "/styles/style.css",
+    "/scripts/khensani-assistant.js",
+    "/scripts/homework-helper.js",
+    "/scripts/learning-path.js",
+    "/scripts/science-lab.js"
+  ]
+}

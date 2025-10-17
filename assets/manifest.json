@@ -1,0 +1,24 @@
+{
+  "name": "MindFlow AI - Learning Superpower",
+  "short_name": "MindFlow",
+  "description": "AI-powered learning with safety tracking, homework help, and personalized education",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#8B5FBF",
+  "theme_color": "#8B5FBF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/mindflow-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/mindflow-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["education", "productivity", "utilities"],
+  "lang": "en-ZA"
+}
