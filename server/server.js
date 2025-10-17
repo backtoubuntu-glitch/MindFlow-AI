@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const socketIO = require('socket.io');
 const http = require('http');
 const cors = require('cors');
@@ -8,15 +8,16 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server, {
     cors: {
-        origin: \"*\",
-        methods: [\"GET\", \"POST\"]
+        origin: "*",
+        methods: ["GET", "POST"]
     }
 });
 
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../public')));
+// Serve static files from the parent directory (where your HTML files are)
+app.use(express.static(path.join(__dirname, '..')));
 
 // Store student locations in memory
 const studentLocations = new Map();
@@ -81,7 +82,7 @@ io.on('connection', (socket) => {
 // HTTP Routes
 app.get('/', (req, res) => {
     res.json({
-        message: 'SmartPath with Khensani - Tracking Server',
+        message: 'MindFlow AI - Learning Platform Server',
         status: 'Running',
         studentsTracked: studentLocations.size,
         connections: io.engine.clientsCount
@@ -101,11 +102,20 @@ app.get('/api/health', (req, res) => {
     });
 });
 
+// Serve the main learning hub
+app.get('/learning', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'advanced-learning.html'));
+});
+
+app.get('/mobile', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'mobile-learning.html'));
+});
+
 // Start server
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-    console.log(\🚀 SmartPath Server running on port \\);
-    console.log(\📍 API Health: http://localhost:\/api/health\);
-    console.log(\🗺️ Locations API: http://localhost:\/api/locations\);
-    console.log(\🌐 WebSocket: ws://localhost:\\);
+    console.log(`🚀 MindFlow AI Server running on port ${PORT}`);
+    console.log(`📍 API Health: http://localhost:${PORT}/api/health`);
+    console.log(`🗺️ Locations API: http://localhost:${PORT}/api/locations`);
+    console.log(`🌐 WebSocket: ws://localhost:${PORT}`);
 });
